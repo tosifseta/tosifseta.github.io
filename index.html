@@ -26,7 +26,6 @@
 
     .cursor-glow{position:fixed;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,113,227,0.04) 0%,transparent 70%);pointer-events:none;z-index:0;transform:translate(-50%,-50%);transition:left .3s ease,top .3s ease}
 
-    /* NAV */
     nav{position:fixed;top:0;left:0;right:0;z-index:1000;backdrop-filter:saturate(180%) blur(20px);background:rgba(250,250,250,.82);border-bottom:1px solid var(--border);padding:0 max(28px,env(safe-area-inset-left));height:56px;display:flex;align-items:center;justify-content:space-between;transition:box-shadow .35s ease}
     nav.scrolled{box-shadow:0 1px 20px rgba(0,0,0,.06)}
     .nav-logo{font-size:16px;font-weight:700;letter-spacing:-.5px;color:var(--text-primary);text-decoration:none;display:flex;align-items:center;gap:8px}
@@ -42,7 +41,6 @@
     .section-title{font-size:clamp(34px,5vw,56px);font-weight:800;letter-spacing:-2px;line-height:1.05;color:var(--text-primary);margin-bottom:16px}
     .section-sub{font-size:18px;color:var(--text-secondary);font-weight:300;max-width:540px;line-height:1.6}
 
-    /* ═══ HERO ═══ */
     #hero{min-height:calc(100vh - 56px);display:flex;align-items:center;padding:100px 28px;max-width:1040px;margin:0 auto;position:relative}
     .hero-content{flex:1;position:relative;z-index:2}
     .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:7px 16px 7px 10px;font-size:13px;font-weight:500;color:var(--text-secondary);margin-bottom:36px;box-shadow:var(--shadow-sm);animation:slideDown .8s ease both}
@@ -64,80 +62,23 @@
     .btn-secondary{background:var(--surface);color:var(--text-primary);border:1px solid var(--border);box-shadow:var(--shadow-sm)}
     .btn-secondary:hover{transform:translateY(-2px);border-color:var(--border-hover);box-shadow:var(--shadow-md)}
 
-    /* ═══ HERO PHONE — simple frame with app icons inside ═══ */
+    /* ═══ HERO PHONE ═══ */
     .hero-visual{flex:0 0 320px;display:flex;align-items:center;justify-content:center;animation:revealUp 1s ease .6s both}
     .hero-visual-wrapper{position:relative;width:220px}
-
-    .phone-wrap{
-      position:relative;
-      width:220px;
-      /* iPhone 14 Pro ratio ~393:852 */
-      aspect-ratio: 393/852;
-      transition:transform .5s cubic-bezier(.4,0,.2,1);
-      filter:drop-shadow(0 40px 60px rgba(0,0,0,.35));
-    }
+    .phone-wrap{position:relative;width:220px;aspect-ratio:393/852;transition:transform .5s cubic-bezier(.4,0,.2,1);filter:drop-shadow(0 40px 60px rgba(0,0,0,.35))}
     .hero-visual-wrapper:hover .phone-wrap{transform:rotateY(-6deg) rotateX(3deg) scale(1.03)}
-
-    /* The frame image IS the phone — it covers everything */
-    .phone-frame-png{
-      position:absolute;inset:0;
-      width:100%;height:100%;
-      object-fit:fill;
-      pointer-events:none;
-      z-index:10;
-    }
-
-    /* App grid sits behind the frame, positioned within the screen area */
-    .phone-screen-area{
-      position:absolute;
-      /* Tuned to sit inside the iPhone 14 Pro frame's screen cutout */
-      top: 14%;
-      left: 6%;
-      right: 6%;
-      bottom: 10%;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      gap: 8px;
-      z-index:1;
-    }
-
-    .phone-app-grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:7px;
-      width:100%;
-      padding:0 6px;
-    }
-    .phone-app{
-      aspect-ratio:1;
-      border-radius:12px;
-      overflow:hidden;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      box-shadow:0 2px 8px rgba(0,0,0,.4);
-      transition:transform .2s;
-      background:#222;
-    }
+    .phone-frame-png{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;z-index:10}
+    .phone-screen-area{position:absolute;top:14%;left:6%;right:6%;bottom:10%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;z-index:1}
+    .phone-app-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;width:100%;padding:0 6px}
+    .phone-app{aspect-ratio:1;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.4);transition:transform .2s;background:#222}
     .phone-app:hover{transform:scale(1.1)}
     .phone-app img{width:100%;height:100%;object-fit:cover;display:block}
     .phone-app-emoji{font-size:15px}
-
-    /* Widget below grid */
-    .phone-widget{
-      width:calc(100% - 12px);
-      background:rgba(255,255,255,.1);
-      border-radius:14px;
-      padding:10px 13px;
-      border:1px solid rgba(255,255,255,.08);
-    }
+    .phone-widget{width:calc(100% - 12px);background:rgba(255,255,255,.1);border-radius:14px;padding:10px 13px;border:1px solid rgba(255,255,255,.08)}
     .phone-wt{color:rgba(255,255,255,.4);font-size:8px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px}
     .phone-wv{color:#fff;font-size:17px;font-weight:800;letter-spacing:-1px}
     .phone-ws{color:rgba(255,255,255,.3);font-size:8px;margin-top:2px}
 
-    /* Float cards */
     .float-card{position:absolute;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:13px 17px;box-shadow:var(--shadow-md);font-size:12px;animation:float 4s ease-in-out infinite;z-index:20}
     .float-card-1{top:10px;right:-110px;animation-delay:0s}
     .float-card-2{bottom:40px;left:-120px;animation-delay:-2s}
@@ -145,7 +86,6 @@
     .float-label{color:var(--text-tertiary);font-size:10px;margin-bottom:2px;text-transform:uppercase;letter-spacing:.08em;font-weight:600}
     .float-value{color:var(--text-primary);font-weight:700;font-size:14px}
     .float-sub{color:var(--text-secondary);font-size:10px;margin-top:2px}
-
     .hero-blob{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0}
     .hero-blob-1{width:400px;height:400px;background:var(--accent);top:-100px;right:-50px;opacity:.06;animation:blobFloat 8s ease-in-out infinite}
     .hero-blob-2{width:300px;height:300px;background:var(--purple);bottom:-50px;left:-100px;opacity:.05;animation:blobFloat 10s ease-in-out infinite reverse}
@@ -161,123 +101,58 @@
     .stat-unit{font-size:22px;font-weight:400;color:var(--text-tertiary)}
     .stat-label{font-size:14px;color:var(--text-secondary);margin-top:10px}
 
-    /* ═══════════════════════════════════
-       APP / PROJECT CARDS — NEW BANNER
-    ═══════════════════════════════════ */
+    /* ═══ CARD BANNER — gradient + centred icon ═══ */
     .apps-grid,.projects-grid-new{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-top:48px}
-
     .app-card,.project-card-new{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-sm);transition:all .4s cubic-bezier(.4,0,.2,1);cursor:pointer;position:relative}
     .app-card:hover,.project-card-new:hover{transform:translateY(-8px) scale(1.01);box-shadow:var(--shadow-xl);border-color:var(--border-hover)}
-    .app-card:hover .app-icon,.project-card-new:hover .app-icon{transform:scale(1.08) rotate(-3deg)}
     .app-card:hover .expand-hint,.project-card-new:hover .expand-hint{opacity:1;transform:translateY(0)}
 
-    /* ── NEW CARD BANNER — screenshot showcase with gradient ── */
     .card-banner{
-      height:200px;
-      position:relative;
-      overflow:hidden;
-      display:flex;
-      align-items:flex-end;
-      justify-content:center;
-      padding:0 16px 16px;
-    }
-    /* Gradient background based on app's accent color */
-    .card-banner-bg{
-      position:absolute;inset:0;
-      z-index:0;
-    }
-    /* Subtle mesh/noise overlay for depth */
-    .card-banner-bg::after{
-      content:'';
-      position:absolute;inset:0;
-      background:
-        radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.15) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
-      z-index:1;
-    }
-    /* Bottom fade for smooth transition to card body */
-    .card-banner-fade{
-      position:absolute;bottom:0;left:0;right:0;height:60px;
-      background:linear-gradient(to top, rgba(0,0,0,0.25), transparent);
-      z-index:2;
-    }
-    /* Screenshot fan — 3 screenshots layered like cards */
-    .banner-screenshots{
-      position:relative;
-      z-index:3;
-      display:flex;
-      align-items:flex-end;
-      justify-content:center;
-      gap:0;
-      height:100%;
-      padding-top:16px;
-    }
-    .banner-ss{
-      height:85%;
-      width:auto;
-      max-width:38%;
-      border-radius:10px;
-      object-fit:cover;
-      object-position:top;
-      border:2px solid rgba(255,255,255,0.2);
-      box-shadow:0 8px 24px rgba(0,0,0,0.3);
-      flex-shrink:0;
-      display:block;
-      transition:transform 0.3s ease;
-    }
-    /* Middle screenshot is bigger and on top */
-    .banner-ss:nth-child(1){
-      transform:rotate(-6deg) translateX(14px) scale(0.9);
-      z-index:1;
-    }
-    .banner-ss:nth-child(2){
-      transform:scale(1.0);
-      z-index:3;
-      height:90%;
-    }
-    .banner-ss:nth-child(3){
-      transform:rotate(6deg) translateX(-14px) scale(0.9);
-      z-index:1;
-    }
-    .app-card:hover .banner-ss:nth-child(1){transform:rotate(-8deg) translateX(10px) scale(0.92)}
-    .app-card:hover .banner-ss:nth-child(2){transform:scale(1.03)}
-    .app-card:hover .banner-ss:nth-child(3){transform:rotate(8deg) translateX(-10px) scale(0.92)}
-    .project-card-new:hover .banner-ss:nth-child(1){transform:rotate(-8deg) translateX(10px) scale(0.92)}
-    .project-card-new:hover .banner-ss:nth-child(2){transform:scale(1.03)}
-    .project-card-new:hover .banner-ss:nth-child(3){transform:rotate(8deg) translateX(-10px) scale(0.92)}
-
-    /* macOS screenshots are wider, adjust */
-    .banner-ss.mac-ss{
-      height:70%;
-      max-width:45%;
-      object-position:center;
-      border-radius:8px;
-    }
-    .banner-ss.mac-ss:nth-child(2){height:75%}
-
-    /* Icon badge on banner — bottom-left overlapping */
-    .banner-icon-badge{
-      position:absolute;
-      bottom:-22px;
-      left:22px;
-      z-index:10;
-      width:56px;height:56px;
-      border-radius:16px;
-      overflow:hidden;
-      box-shadow:0 4px 16px rgba(0,0,0,0.2), 0 0 0 3px var(--surface);
-      background:#e8e8e8;
+      height:180px;position:relative;overflow:hidden;
       display:flex;align-items:center;justify-content:center;
-      transition:transform .3s ease;
     }
-    .banner-icon-badge img{width:100%;height:100%;object-fit:cover;display:block}
-    .app-card:hover .banner-icon-badge,
-    .project-card-new:hover .banner-icon-badge{transform:scale(1.08) rotate(-3deg)}
+    .card-banner-bg{position:absolute;inset:0;z-index:0}
+    /* Decorative circles for depth */
+    .card-banner-bg::before{
+      content:'';position:absolute;
+      width:280px;height:280px;border-radius:50%;
+      top:-100px;right:-60px;
+      background:rgba(255,255,255,0.12);
+    }
+    .card-banner-bg::after{
+      content:'';position:absolute;
+      width:200px;height:200px;border-radius:50%;
+      bottom:-80px;left:-40px;
+      background:rgba(255,255,255,0.08);
+    }
+    .card-banner-fade{
+      position:absolute;bottom:0;left:0;right:0;height:80px;
+      background:linear-gradient(to top, rgba(0,0,0,0.15), transparent);
+      z-index:1;
+    }
+    /* Centred icon in banner */
+    .banner-centre-icon{
+      position:relative;z-index:3;
+      width:80px;height:80px;border-radius:22px;overflow:hidden;
+      box-shadow:0 12px 36px rgba(0,0,0,0.35), 0 0 0 2px rgba(255,255,255,0.2);
+      display:flex;align-items:center;justify-content:center;
+      background:#e8e8e8;
+      transition:transform .35s cubic-bezier(.4,0,.2,1);
+    }
+    .banner-centre-icon img{width:100%;height:100%;object-fit:cover;display:block}
+    .app-card:hover .banner-centre-icon,
+    .project-card-new:hover .banner-centre-icon{transform:scale(1.1) rotate(-3deg)}
+    .banner-app-label{
+      position:absolute;bottom:14px;left:20px;z-index:4;
+      color:#fff;font-size:11px;font-weight:600;letter-spacing:.04em;
+      opacity:.85;text-shadow:0 1px 4px rgba(0,0,0,.3);
+    }
 
-    .card-body{padding:28px 22px 20px}
-    .card-top-row{display:flex;align-items:center;justify-content:flex-end;margin-bottom:10px}
-
-    .app-icon{width:52px;height:52px;border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 5px 16px rgba(0,0,0,.18);transition:transform .3s ease;flex-shrink:0;background:#e8e8e8}
+    .card-body{padding:18px 22px 20px}
+    .card-icon-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+    .app-icon{width:48px;height:48px;border-radius:13px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 14px rgba(0,0,0,.15);transition:transform .3s ease;flex-shrink:0;background:#e8e8e8}
     .app-icon img{width:100%;height:100%;object-fit:cover;display:block}
+    .app-card:hover .app-icon,.project-card-new:hover .app-icon{transform:scale(1.08) rotate(-3deg)}
 
     .app-store-btn{display:inline-flex;align-items:center;gap:5px;background:var(--text-primary);color:#fff;border-radius:100px;padding:7px 15px;font-size:11px;font-weight:700;text-decoration:none;letter-spacing:.05em;text-transform:uppercase;transition:all .25s}
     .app-store-btn:hover{background:var(--accent);transform:scale(1.05)}
@@ -291,29 +166,17 @@
     .tag:hover{background:var(--accent);color:#fff}
     .expand-hint{font-size:11px;color:var(--text-tertiary);text-align:center;padding:0 22px 13px;font-weight:500;opacity:0;transform:translateY(4px);transition:all .3s ease}
 
-    /* ═══════════════════════════════════
-       MODAL
-    ═══════════════════════════════════ */
+    /* ═══ MODAL ═══ */
     .modal-overlay{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.55);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .4s cubic-bezier(.4,0,.2,1);padding:24px}
     .modal-overlay.active{opacity:1;visibility:visible}
     .modal{background:var(--surface);border-radius:var(--radius-xl);max-width:700px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow-xl);transform:translateY(40px) scale(.95);transition:transform .4s cubic-bezier(.4,0,.2,1);border:1px solid var(--border);scrollbar-width:none;-ms-overflow-style:none}
     .modal::-webkit-scrollbar{display:none}
     .modal-overlay.active .modal{transform:translateY(0) scale(1)}
 
-    .modal-header{
-      height:240px;display:flex;align-items:center;justify-content:center;
-      position:relative;overflow:hidden;
-    }
-    .modal-hdr-bg-grad{
-      position:absolute;inset:0;z-index:0;
-    }
-    .modal-hdr-bg-grad::after{
-      content:'';position:absolute;inset:0;
-      background:
-        radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.18) 0%, transparent 60%),
-        radial-gradient(ellipse at 70% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
-    }
-    .modal-hdr-fade{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.05),rgba(0,0,0,.4));z-index:1}
+    .modal-header{height:240px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+    .modal-hdr-bg-grad{position:absolute;inset:0;z-index:0}
+    .modal-hdr-bg-grad::before{content:'';position:absolute;width:320px;height:320px;border-radius:50%;top:-120px;right:-80px;background:rgba(255,255,255,0.12)}
+    .modal-hdr-bg-grad::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.05),rgba(0,0,0,.35));z-index:1}
     .modal-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.35);backdrop-filter:blur(10px);border:none;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:10}
     .modal-close:hover{background:rgba(0,0,0,.65);transform:scale(1.1)}
     .modal-hdr-icon{position:relative;z-index:2;width:88px;height:88px;border-radius:24px;overflow:hidden;box-shadow:0 16px 40px rgba(0,0,0,.5),0 0 0 2px rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:40px;background:#e8e8e8}
@@ -328,25 +191,20 @@
     .modal-desc{font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border)}
     .modal-sec-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:12px}
 
-    /* Screenshots in modal — proper aspect ratios */
+    /* Modal screenshots — natural aspect, scrollable */
     .modal-ss-wrap{display:flex;gap:10px;overflow-x:auto;margin-bottom:24px;scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;padding-bottom:4px}
     .modal-ss-wrap::-webkit-scrollbar{display:none}
-
     .modal-ss-img{
-      flex-shrink:0;border-radius:12px;display:block;
-      border:1px solid rgba(0,0,0,.07);
-      background:#f0f0f0;
+      flex-shrink:0;border-radius:14px;display:block;
+      border:1px solid rgba(0,0,0,.08);background:#f0f0f0;
+      box-shadow:0 2px 12px rgba(0,0,0,.06);
     }
-    /* iOS screenshots — use natural aspect ratio, constrain height */
     .modal-ss-img.ss-ios{
-      height:280px;
-      width:auto;
+      height:300px;width:auto;min-width:140px;
       object-fit:contain;
     }
-    /* macOS screenshots */
     .modal-ss-img.ss-mac{
-      height:180px;
-      width:auto;
+      height:190px;width:auto;min-width:260px;
       object-fit:contain;
     }
 
@@ -369,7 +227,6 @@
     .skill-bar{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--accent),#5ac8fa);transform:scaleX(0);transform-origin:left;transition:transform 1s cubic-bezier(.4,0,.2,1)}
     .skill-bar.animate{transform:scaleX(1)}
 
-    /* CONTACT */
     #contact{text-align:center}
     #contact .section-label::before{display:none}
     #contact .section-sub{margin:0 auto 44px}
@@ -379,7 +236,6 @@
 
     footer{text-align:center;padding:48px 28px;border-top:1px solid var(--border);font-size:13px;color:var(--text-tertiary)}
 
-    /* REVEAL */
     .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
     .reveal.visible{opacity:1;transform:translateY(0)}
     .reveal-scale{opacity:0;transform:translateY(24px) scale(.97);transition:opacity .6s cubic-bezier(.4,0,.2,1),transform .6s cubic-bezier(.4,0,.2,1)}
@@ -396,7 +252,8 @@
       .section{padding:64px 20px}
       .modal{max-height:92vh}
       .modal-header{height:180px}
-      .card-banner{height:170px}
+      .card-banner{height:160px}
+      .banner-centre-icon{width:64px;height:64px;border-radius:18px}
     }
     @media(min-width:769px) and (max-width:1024px){.projects-grid-new{grid-template-columns:1fr 1fr}}
   </style>
@@ -433,7 +290,6 @@
   <div class="hero-visual">
     <div class="hero-visual-wrapper">
       <div class="phone-wrap">
-        <!-- App grid sits behind the frame -->
         <div class="phone-screen-area">
           <div class="phone-app-grid" id="heroAppGrid"></div>
           <div class="phone-widget">
@@ -442,7 +298,6 @@
             <div class="phone-ws">iOS · 3+ years shipping</div>
           </div>
         </div>
-        <!-- iPhone 14 Pro transparent frame PNG — everything else (notch, bezels, etc.) is in this image -->
         <img class="phone-frame-png" src="iphone-frame.png" alt="" draggable="false" />
       </div>
       <div class="float-card float-card-1">
@@ -548,7 +403,6 @@
     <div class="modal-header" id="modalHeader">
       <div class="modal-hdr-bg-grad" id="modalHdrBgGrad"></div>
       <button class="modal-close" onclick="closeModal()">✕</button>
-      <div class="modal-hdr-fade"></div>
       <div class="modal-hdr-icon" id="modalHdrIcon"></div>
     </div>
     <div class="modal-body">
@@ -604,27 +458,18 @@ function renderHero(){
   }).join('');
 }
 
-/* ── Build card banner — screenshot fan + gradient ── */
+/* ── Build card banner — gradient bg + centred icon ── */
 function buildBanner(item){
-  const isMac = item.type === 'macos';
-  const ssCls = isMac ? 'banner-ss mac-ss' : 'banner-ss';
-  // Show 3 screenshots in a fan layout
-  const ssCount = Math.min(3, item.screenshots ? item.screenshots.length : 0);
-  let ssHtml = '';
-  for(let i = 0; i < ssCount; i++){
-    ssHtml += `<img class="${ssCls}" src="${item.screenshots[i]}" crossorigin="anonymous" loading="lazy" alt="" onerror="this.style.display='none'">`;
-  }
-
   return `
     <div class="card-banner">
       <div class="card-banner-bg" style="background:${item.iconBg}"></div>
       <div class="card-banner-fade"></div>
-      <div class="banner-screenshots">${ssHtml}</div>
-      <div class="banner-icon-badge">
+      <div class="banner-centre-icon">
         ${item.iconUrl
-          ? `<img src="${item.iconUrl}" crossorigin="anonymous" loading="lazy" alt="${item.name}" onerror="this.parentElement.style.background='${item.iconBg}';this.style.display='none'">`
-          : `<span style="font-size:26px">${item.emoji}</span>`}
+          ? `<img src="${item.iconUrl}" crossorigin="anonymous" loading="lazy" alt="${item.name}" onerror="this.parentElement.style.background='${item.iconBg}';this.outerHTML='<span style=font-size:36px>${item.emoji}</span>'">`
+          : `<span style="font-size:36px">${item.emoji}</span>`}
       </div>
+      <div class="banner-app-label">${item.subtitle}</div>
     </div>`;
 }
 
@@ -635,7 +480,10 @@ function renderAppCards(){
     <div class="app-card reveal-scale" onclick="openModal('app','${id}')">
       ${buildBanner(a)}
       <div class="card-body">
-        <div class="card-top-row">
+        <div class="card-icon-row">
+          <div class="app-icon">
+            ${a.iconUrl?`<img src="${a.iconUrl}" crossorigin="anonymous" loading="lazy" alt="" onerror="this.parentElement.style.background='${a.iconBg}';this.outerHTML='<span>${a.emoji}</span>'">`:`<span>${a.emoji}</span>`}
+          </div>
           <a href="${a.storeUrl}" target="_blank" class="app-store-btn" onclick="event.stopPropagation()">↗ Store</a>
         </div>
         <div class="app-name">${a.name}</div>
@@ -653,7 +501,10 @@ function renderProjectCards(){
     <div class="project-card-new reveal-scale" onclick="openModal('project','${id}')">
       ${buildBanner(p)}
       <div class="card-body">
-        <div class="card-top-row">
+        <div class="card-icon-row">
+          <div class="app-icon">
+            ${p.iconUrl?`<img src="${p.iconUrl}" crossorigin="anonymous" loading="lazy" alt="" onerror="this.parentElement.style.background='${p.iconBg}';this.outerHTML='<span>${p.emoji}</span>'">`:`<span>${p.emoji}</span>`}
+          </div>
           <span class="${p.badge==='wip'?'badge-wip':'badge-macos'}">${p.badge==='wip'?'In Progress':'macOS'}</span>
         </div>
         <div class="app-name">${p.name}</div>
@@ -670,11 +521,8 @@ function openModal(src,id){
   if(!data) return;
   const isMac = data.type === 'macos';
 
-  /* Header gradient background */
-  const hdrBg = document.getElementById('modalHdrBgGrad');
-  hdrBg.style.background = data.iconBg;
+  document.getElementById('modalHdrBgGrad').style.background = data.iconBg;
 
-  /* Header icon */
   const hi = document.getElementById('modalHdrIcon');
   hi.innerHTML = ''; hi.style.background = '#e8e8e8';
   if(data.iconUrl){
@@ -685,7 +533,6 @@ function openModal(src,id){
     hi.appendChild(img);
   } else { hi.style.background = data.iconBg; hi.textContent = data.emoji }
 
-  /* Body icon */
   const bi = document.getElementById('modalIcon');
   bi.innerHTML = ''; bi.style.background = '#e8e8e8';
   if(data.iconUrl){
@@ -702,7 +549,6 @@ function openModal(src,id){
   document.getElementById('modalTech').innerHTML = data.tech.map(t => `<span class="modal-tech-tag">${t}</span>`).join('');
   document.getElementById('modalFeatures').innerHTML = data.features.map(f => `<li>${f}</li>`).join('');
 
-  /* Screenshots — proper sizing */
   const ssWrap = document.getElementById('modalSs');
   const ssSec = document.getElementById('modalSsSection');
   if(data.screenshots && data.screenshots.length){
@@ -713,7 +559,6 @@ function openModal(src,id){
     ).join('');
   } else { ssSec.style.display = 'none' }
 
-  /* Actions */
   const act = document.getElementById('modalActions');
   if(src === 'app' && data.storeUrl){
     act.innerHTML = `<a href="${data.storeUrl}" target="_blank" class="modal-btn-store"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View on App Store</a>`;
