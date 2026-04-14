@@ -150,12 +150,33 @@
     }
     .phone-status { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px 4px; }
     .phone-time { color: #fff; font-size: 12px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
-    .phone-notch { width: 90px; height: 22px; background: #000; border-radius: 0 0 16px 16px; margin: 0 auto; }
-    .phone-app-grid { padding: 18px 16px; display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-top: 8px; }
-    .phone-app { aspect-ratio: 1; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 18px; transition: transform 0.2s; }
-    .phone-app:hover { transform: scale(1.15); }
+
+    /* Dynamic Island (pill, no notch) */
+    .phone-dynamic-island {
+      width: 80px; height: 26px; background: #000; border-radius: 20px;
+      margin: 4px auto 0; display: flex; align-items: center; justify-content: center;
+      gap: 6px;
+    }
+    .phone-dynamic-island .di-camera {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #1a1a1a; border: 1.5px solid #2a2a2a;
+    }
+    .phone-dynamic-island .di-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: #0a84ff; opacity: 0.8;
+    }
+
+    .phone-app-grid { padding: 14px 14px 10px; display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+    .phone-app {
+      aspect-ratio: 1; border-radius: 14px; display: flex; align-items: center; justify-content: center;
+      overflow: hidden; transition: transform 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .phone-app:hover { transform: scale(1.12); }
+    .phone-app img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .phone-app-emoji { font-size: 18px; }
+
     .phone-widget {
-      margin: 6px 16px 0; background: rgba(255,255,255,0.06); border-radius: 20px; padding: 16px;
+      margin: 4px 14px 0; background: rgba(255,255,255,0.06); border-radius: 18px; padding: 14px;
       border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(10px);
     }
     .phone-widget-title { color: rgba(255,255,255,0.45); font-size: 9px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
@@ -207,23 +228,23 @@
     }
     .app-card:hover { transform: translateY(-8px) scale(1.01); box-shadow: var(--shadow-xl); border-color: var(--border-hover); }
 
-    /* Card header: screenshot auto-scroll strip */
+    /* Card header: single static first screenshot */
     .app-card-header {
       height: 160px;
       position: relative;
       overflow: hidden;
       background: var(--bg);
     }
-    /* Gradient overlay so it fades into the card body */
+    /* Gradient overlay */
     .app-card-header::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, transparent 50%, var(--surface) 100%);
+      background: linear-gradient(to bottom, transparent 40%, var(--surface) 100%);
       pointer-events: none;
       z-index: 2;
     }
-    /* Fallback gradient (shown when no screenshots) */
+    /* Fallback gradient */
     .app-card-header-fallback {
       position: absolute; inset: 0;
       display: flex; align-items: center; justify-content: center;
@@ -231,39 +252,14 @@
       z-index: 0;
     }
 
-    /* Screenshot strip (horizontal auto-scroll) */
-    .ss-strip {
+    /* Static banner image */
+    .banner-img {
       position: absolute; inset: 0;
-      overflow: hidden;
-      z-index: 1;
-    }
-    .ss-track {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 10px;
-      width: max-content;
-      height: 100%;
-      will-change: transform;
-    }
-    .ss-track.animate {
-      animation: ssScroll 14s linear infinite;
-    }
-    .ss-track:hover { animation-play-state: paused; }
-    .ss-thumb {
-      height: 140px;
-      width: auto;
-      border-radius: 10px;
+      width: 100%; height: 100%;
       object-fit: cover;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      flex-shrink: 0;
-      border: 1px solid rgba(0,0,0,0.08);
-      transition: transform 0.3s;
-    }
-    .ss-thumb:hover { transform: scale(1.04); }
-    @keyframes ssScroll {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      object-position: top;
+      z-index: 1;
+      display: block;
     }
 
     .app-card-body { padding: 20px 24px 24px; }
@@ -300,19 +296,18 @@
     .app-card:hover .app-card-expand-hint { opacity: 1; transform: translateY(0); }
 
     /* =====================
-       PROJECT CARDS (Other Projects) — same style as app cards
+       PROJECT CARDS — same exact style as app cards
     ===================== */
     .projects-grid-new { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 20px; margin-top: 48px; }
 
     .project-card-new {
       background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl);
       overflow: hidden; box-shadow: var(--shadow-sm);
-      transition: all 0.4s cubic-bezier(0.4,0,0.2,1); position: relative;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1); position: relative; cursor: pointer;
     }
     .project-card-new:hover { transform: translateY(-8px) scale(1.01); box-shadow: var(--shadow-xl); border-color: var(--border-hover); }
-
-    .project-card-new .app-card-header { cursor: default; }
-    .project-card-new .app-card-body { cursor: default; }
+    .project-card-new:hover .app-icon { transform: scale(1.1) rotate(-3deg); }
+    .project-card-new:hover .app-card-expand-hint { opacity: 1; transform: translateY(0); }
 
     .badge-wip {
       font-size: 11px; background: var(--accent-soft); color: var(--accent);
@@ -322,14 +317,6 @@
       font-size: 11px; background: var(--bg); color: var(--text-secondary);
       padding: 5px 12px; border-radius: 100px; font-weight: 700; border: 1px solid var(--border);
     }
-    .project-icon-wrap {
-      width: 56px; height: 56px; border-radius: 16px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 28px; box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-      flex-shrink: 0;
-      transition: transform 0.3s ease;
-    }
-    .project-card-new:hover .project-icon-wrap { transform: scale(1.1) rotate(-3deg); }
 
     /* =====================
        MODAL
@@ -379,183 +366,35 @@
     .modal-btn-store:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.25); }
 
     /* =====================
-       DEVICE FRAMES (modal screenshots)
+       MODAL SCREENSHOTS — plain images, no device frames, no shadow overlay
     ===================== */
     .modal-screenshots-scroll {
       display: flex;
-      gap: 16px;
+      gap: 12px;
       overflow-x: auto;
-      padding-bottom: 12px;
+      padding-bottom: 8px;
       margin-bottom: 28px;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
     }
     .modal-screenshots-scroll::-webkit-scrollbar { height: 4px; }
-    .modal-screenshots-scroll::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 2px; }
+    .modal-screenshots-scroll::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 2px; }
 
-    /* iPhone 14 Pro frame */
-    .device-ios {
-      position: relative;
+    .modal-ss-img {
       flex-shrink: 0;
-      width: 130px;
       scroll-snap-align: start;
-    }
-    .device-ios-outer {
-      width: 130px;
-      height: 265px;
-      background: #1a1a1a;
-      border-radius: 30px;
-      border: 2px solid #3d3d3d;
-      box-shadow:
-        0 0 0 1px #555,
-        inset 0 0 0 1px #000,
-        0 20px 40px rgba(0,0,0,0.3);
-      position: relative;
-      overflow: hidden;
-    }
-    /* Side buttons */
-    .device-ios-outer::before {
-      content: '';
-      position: absolute;
-      left: -3px; top: 60px;
-      width: 3px; height: 28px;
-      background: #3d3d3d;
-      border-radius: 2px 0 0 2px;
-      box-shadow: 0 34px 0 #3d3d3d, 0 58px 0 #3d3d3d;
-    }
-    .device-ios-outer::after {
-      content: '';
-      position: absolute;
-      right: -3px; top: 80px;
-      width: 3px; height: 40px;
-      background: #3d3d3d;
-      border-radius: 0 2px 2px 0;
-    }
-    .device-ios-screen {
-      position: absolute;
-      inset: 3px;
-      background: #000;
-      border-radius: 26px;
-      overflow: hidden;
-    }
-    .device-ios-screen img {
-      width: 100%;
-      height: 100%;
+      border-radius: 14px;
       object-fit: cover;
       display: block;
+      border: 1px solid var(--border);
     }
-    /* Dynamic Island */
-    .device-ios-island {
-      position: absolute;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 42px;
-      height: 11px;
-      background: #000;
-      border-radius: 100px;
-      z-index: 5;
+    .modal-ss-img.ios-img {
+      height: 260px;
+      width: auto;
     }
-    /* Placeholder */
-    .device-ios-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: #1c1c1e;
-      gap: 6px;
-      border-radius: 26px;
-    }
-    .device-ios-placeholder span { font-size: 22px; opacity: 0.4; }
-    .device-ios-placeholder small {
-      color: rgba(255,255,255,0.25);
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-align: center;
-      padding: 0 8px;
-    }
-    .device-ios-label {
-      text-align: center;
-      font-size: 10px;
-      color: var(--text-tertiary);
-      margin-top: 8px;
-      font-weight: 500;
-    }
-
-    /* MacBook frame */
-    .device-mac {
-      flex-shrink: 0;
-      width: 200px;
-      scroll-snap-align: start;
-    }
-    .device-mac-lid {
-      width: 200px;
-      background: #2c2c2e;
-      border: 2px solid #444;
-      border-radius: 8px 8px 2px 2px;
-      padding: 10px 10px 6px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(255,255,255,0.05);
-      position: relative;
-    }
-    .device-mac-screen-inner {
-      background: #000;
-      border-radius: 4px;
-      overflow: hidden;
-      aspect-ratio: 16/10;
-    }
-    .device-mac-screen-inner img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .device-mac-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: #1c1c1e;
-      gap: 4px;
-      aspect-ratio: 16/10;
-    }
-    .device-mac-placeholder span { font-size: 20px; opacity: 0.4; }
-    .device-mac-placeholder small {
-      color: rgba(255,255,255,0.25); font-size: 9px; font-weight: 600;
-      letter-spacing: 0.05em; text-align: center; padding: 0 4px;
-    }
-    .device-mac-notch {
-      position: absolute;
-      top: 0; left: 50%; transform: translateX(-50%);
-      width: 16px; height: 5px;
-      background: #222;
-      border-radius: 0 0 4px 4px;
-    }
-    .device-mac-base {
-      width: 110%;
-      margin-left: -5%;
-      height: 10px;
-      background: linear-gradient(to bottom, #4a4a4c, #3a3a3c);
-      border-radius: 0 0 6px 6px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-    }
-    .device-mac-foot {
-      width: 40%;
-      height: 4px;
-      margin: 0 auto;
-      background: #2c2c2e;
-      border-radius: 0 0 4px 4px;
-    }
-    .device-mac-label {
-      text-align: center;
-      font-size: 10px;
-      color: var(--text-tertiary);
-      margin-top: 8px;
-      font-weight: 500;
+    .modal-ss-img.mac-img {
+      height: 160px;
+      width: auto;
     }
 
     /* =====================
@@ -628,8 +467,8 @@
   <a href="#hero" class="nav-logo"><span class="nav-logo-icon">TS</span> Tosif Seta</a>
   <ul class="nav-links">
     <li><a href="#apps">Apps</a></li>
-    <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -657,16 +496,13 @@
               <span class="phone-time">9:41</span>
               <span style="color:rgba(255,255,255,0.5);font-size:10px">●●●</span>
             </div>
-            <div class="phone-notch"></div>
-            <div class="phone-app-grid">
-              <div class="phone-app" style="background:linear-gradient(135deg,#ff6b9d,#ee5a24)">🌸</div>
-              <div class="phone-app" style="background:linear-gradient(135deg,#4a90d9,#007aff)">🧹</div>
-              <div class="phone-app" style="background:linear-gradient(135deg,#27ae60,#2ecc71)">🌿</div>
-              <div class="phone-app" style="background:linear-gradient(135deg,#e74c3c,#c0392b)">📄</div>
-              <div class="phone-app" style="background:linear-gradient(135deg,#8e44ad,#9b59b6)">📝</div>
-              <div class="phone-app" style="background:linear-gradient(135deg,#f39c12,#e67e22)">⚡</div>
-              <div class="phone-app" style="background:linear-gradient(135deg,#1abc9c,#16a085)">🖥</div>
-              <div class="phone-app" style="background:linear-gradient(135deg,#636e72,#2d3436)">⚙️</div>
+            <!-- Dynamic Island — pill shape, no notch bar -->
+            <div class="phone-dynamic-island">
+              <div class="di-dot"></div>
+              <div class="di-camera"></div>
+            </div>
+            <div class="phone-app-grid" id="heroAppGrid">
+              <!-- App icons injected by JS -->
             </div>
             <div class="phone-widget">
               <div class="phone-widget-title">Live on App Store</div>
@@ -713,9 +549,17 @@
       <h2 class="section-title">Live Projects</h2>
       <p class="section-sub">Production iOS apps used by real people — owned end-to-end from architecture to submission.</p>
     </div>
-    <div class="apps-grid stagger" id="appsGrid">
-      <!-- Cards injected by JS -->
+    <div class="apps-grid stagger" id="appsGrid"></div>
+  </section>
+
+  <!-- ==================== OTHER PROJECTS (moved before Skills) ==================== -->
+  <section class="section" id="projects">
+    <div class="reveal">
+      <p class="section-label">In Progress & Local</p>
+      <h2 class="section-title">Other Projects</h2>
+      <p class="section-sub">Personal experiments, macOS utilities, and apps in progress that show where I'm headed next.</p>
     </div>
+    <div class="projects-grid-new stagger" id="projectsGrid"></div>
   </section>
 
   <!-- ==================== SKILLS ==================== -->
@@ -754,18 +598,6 @@
         <div class="skill-item"><span class="skill-name">Git & Version Control</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="85%"></div></div></div>
         <div class="skill-item"><span class="skill-name">macOS App Development</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="75%"></div></div></div>
       </div>
-    </div>
-  </section>
-
-  <!-- ==================== OTHER PROJECTS ==================== -->
-  <section class="section" id="projects">
-    <div class="reveal">
-      <p class="section-label">In Progress & Local</p>
-      <h2 class="section-title">Other Projects</h2>
-      <p class="section-sub">Personal experiments, macOS utilities, and apps in progress that show where I'm headed next.</p>
-    </div>
-    <div class="projects-grid-new stagger" id="projectsGrid">
-      <!-- Cards injected by JS -->
     </div>
   </section>
 
@@ -818,19 +650,6 @@
 </div>
 
 <script>
-/* =====================================================
-   DATA — ADD YOUR IMAGE URLS HERE
-   =====================================================
-   For each app:
-     iconUrl:     URL to your app icon image
-     screenshots: Array of URLs to your screenshots
-                  (iOS: portrait images, macOS: landscape)
-   
-   HOW TO ADD IMAGES (see guide at bottom of page):
-   Example GitHub URL:
-   'https://tosifseta.github.io/assets/affirmation/icon.png'
-===================================================== */
-
 const appData = {
   affirmation: {
     emoji: '🌸',
@@ -838,18 +657,18 @@ const appData = {
     iconBg: 'linear-gradient(135deg,#ff6b9d,#ee5a24)',
     iconUrl: 'https://tosifseta.github.io/assets/affirmation/icon.png',
     screenshots: [
-                  'https://tosifseta.github.io/assets/affirmation/ss1.png',
-                  'https://tosifseta.github.io/assets/affirmation/ss2.png',
-                  'https://tosifseta.github.io/assets/affirmation/ss3.png',
-                  'https://tosifseta.github.io/assets/affirmation/ss4.png',
-                  'https://tosifseta.github.io/assets/affirmation/ss5.png',
-                  'https://tosifseta.github.io/assets/affirmation/ss6.png',
-                  'https://tosifseta.github.io/assets/affirmation/ss7.png',
-                  'https://tosifseta.github.io/assets/affirmation/ss8.png',
-                  'https://tosifseta.github.io/assets/affirmation/ss9.png',
-                  'https://tosifseta.github.io/assets/affirmation/ss10.png'
-                  ],
-     type: 'ios',
+      'https://tosifseta.github.io/assets/affirmation/ss1.png',
+      'https://tosifseta.github.io/assets/affirmation/ss2.png',
+      'https://tosifseta.github.io/assets/affirmation/ss3.png',
+      'https://tosifseta.github.io/assets/affirmation/ss4.png',
+      'https://tosifseta.github.io/assets/affirmation/ss5.png',
+      'https://tosifseta.github.io/assets/affirmation/ss6.png',
+      'https://tosifseta.github.io/assets/affirmation/ss7.png',
+      'https://tosifseta.github.io/assets/affirmation/ss8.png',
+      'https://tosifseta.github.io/assets/affirmation/ss9.png',
+      'https://tosifseta.github.io/assets/affirmation/ss10.png'
+    ],
+    type: 'ios',
     name: 'Affirmation – Daily Mindset',
     subtitle: 'Wellness & Mindfulness',
     desc: 'A high-engagement wellness app on the App Store built entirely in SwiftUI. Delivers daily positive affirmations through smart notifications, beautiful custom WidgetKit home-screen widgets, and fully localized content supporting multiple languages. Designed with a focus on calm, intentional UX.',
@@ -869,15 +688,15 @@ const appData = {
     iconBg: 'linear-gradient(135deg,#4a90d9,#007aff)',
     iconUrl: 'https://tosifseta.github.io/assets/cleanup/icon.png',
     screenshots: [
-                  'https://tosifseta.github.io/assets/cleanup/ss1.png',
-                  'https://tosifseta.github.io/assets/cleanup/ss2.png',
-                  'https://tosifseta.github.io/assets/cleanup/ss3.png',
-                  'https://tosifseta.github.io/assets/cleanup/ss4.png',
-                  'https://tosifseta.github.io/assets/cleanup/ss5.png',
-                  'https://tosifseta.github.io/assets/cleanup/ss6.png',
-                  'https://tosifseta.github.io/assets/cleanup/ss7.png',
-                  'https://tosifseta.github.io/assets/cleanup/ss8.png'
-                  ],
+      'https://tosifseta.github.io/assets/cleanup/ss1.png',
+      'https://tosifseta.github.io/assets/cleanup/ss2.png',
+      'https://tosifseta.github.io/assets/cleanup/ss3.png',
+      'https://tosifseta.github.io/assets/cleanup/ss4.png',
+      'https://tosifseta.github.io/assets/cleanup/ss5.png',
+      'https://tosifseta.github.io/assets/cleanup/ss6.png',
+      'https://tosifseta.github.io/assets/cleanup/ss7.png',
+      'https://tosifseta.github.io/assets/cleanup/ss8.png'
+    ],
     type: 'ios',
     name: 'CleanUp – AI Storage Optimizer',
     subtitle: 'Utility & Performance',
@@ -898,15 +717,15 @@ const appData = {
     iconBg: 'linear-gradient(135deg,#27ae60,#2ecc71)',
     iconUrl: 'https://tosifseta.github.io/assets/purecheck/icon.png',
     screenshots: [
-                  'https://tosifseta.github.io/assets/purecheck/ss1.png',
-                  'https://tosifseta.github.io/assets/purecheck/ss2.png',
-                  'https://tosifseta.github.io/assets/purecheck/ss3.png',
-                  'https://tosifseta.github.io/assets/purecheck/ss4.png',
-                  'https://tosifseta.github.io/assets/purecheck/ss5.png',
-                  'https://tosifseta.github.io/assets/purecheck/ss6.png',
-                  'https://tosifseta.github.io/assets/purecheck/ss7.png',
-                  'https://tosifseta.github.io/assets/purecheck/ss8.png'
-                  ],
+      'https://tosifseta.github.io/assets/purecheck/ss1.png',
+      'https://tosifseta.github.io/assets/purecheck/ss2.png',
+      'https://tosifseta.github.io/assets/purecheck/ss3.png',
+      'https://tosifseta.github.io/assets/purecheck/ss4.png',
+      'https://tosifseta.github.io/assets/purecheck/ss5.png',
+      'https://tosifseta.github.io/assets/purecheck/ss6.png',
+      'https://tosifseta.github.io/assets/purecheck/ss7.png',
+      'https://tosifseta.github.io/assets/purecheck/ss8.png'
+    ],
     type: 'ios',
     name: 'PureCheck – Food & Cosmetic Scanner',
     subtitle: 'Health & Scanner',
@@ -927,16 +746,16 @@ const appData = {
     iconBg: 'linear-gradient(135deg,#e74c3c,#c0392b)',
     iconUrl: 'https://tosifseta.github.io/assets/pdfeditor/icon.png',
     screenshots: [
-                  'https://tosifseta.github.io/assets/pdfeditor/ss1.png',
-                  'https://tosifseta.github.io/assets/pdfeditor/ss2.png',
-                  'https://tosifseta.github.io/assets/pdfeditor/ss3.png',
-                  'https://tosifseta.github.io/assets/pdfeditor/ss4.png',
-                  'https://tosifseta.github.io/assets/pdfeditor/ss5.png',
-                  'https://tosifseta.github.io/assets/pdfeditor/ss6.png',
-                  'https://tosifseta.github.io/assets/pdfeditor/ss7.png',
-                  'https://tosifseta.github.io/assets/pdfeditor/ss8.png',
-                  'https://tosifseta.github.io/assets/pdfeditor/ss9.png'
-                  ],
+      'https://tosifseta.github.io/assets/pdfeditor/ss1.png',
+      'https://tosifseta.github.io/assets/pdfeditor/ss2.png',
+      'https://tosifseta.github.io/assets/pdfeditor/ss3.png',
+      'https://tosifseta.github.io/assets/pdfeditor/ss4.png',
+      'https://tosifseta.github.io/assets/pdfeditor/ss5.png',
+      'https://tosifseta.github.io/assets/pdfeditor/ss6.png',
+      'https://tosifseta.github.io/assets/pdfeditor/ss7.png',
+      'https://tosifseta.github.io/assets/pdfeditor/ss8.png',
+      'https://tosifseta.github.io/assets/pdfeditor/ss9.png'
+    ],
     type: 'ios',
     name: 'PDF Editor – Document Manager',
     subtitle: 'Productivity & Documents',
@@ -960,13 +779,13 @@ const projectData = {
     iconBg: 'linear-gradient(135deg,#8e44ad,#9b59b6)',
     iconUrl: 'https://tosifseta.github.io/assets/resumeit/icon.png',
     screenshots: [
-                  'https://tosifseta.github.io/assets/resumeit/ss1.png',
-                  'https://tosifseta.github.io/assets/resumeit/ss2.png',
-                  'https://tosifseta.github.io/assets/resumeit/ss3.png',
-                  'https://tosifseta.github.io/assets/resumeit/ss4.png',
-                  'https://tosifseta.github.io/assets/resumeit/ss5.png',
-                  'https://tosifseta.github.io/assets/resumeit/ss6.png'
-                  ],
+      'https://tosifseta.github.io/assets/resumeit/ss1.png',
+      'https://tosifseta.github.io/assets/resumeit/ss2.png',
+      'https://tosifseta.github.io/assets/resumeit/ss3.png',
+      'https://tosifseta.github.io/assets/resumeit/ss4.png',
+      'https://tosifseta.github.io/assets/resumeit/ss5.png',
+      'https://tosifseta.github.io/assets/resumeit/ss6.png'
+    ],
     type: 'ios',
     badge: 'wip',
     name: 'ResumeIt : AI Resume Builder',
@@ -987,11 +806,11 @@ const projectData = {
     iconBg: 'linear-gradient(135deg,#f39c12,#e67e22)',
     iconUrl: 'https://tosifseta.github.io/assets/shortcut/icon.png',
     screenshots: [
-                  'https://tosifseta.github.io/assets/shortcut/ss1.png',
-                  'https://tosifseta.github.io/assets/shortcut/ss2.png',
-                  'https://tosifseta.github.io/assets/shortcut/ss3.png',
-                  'https://tosifseta.github.io/assets/shortcut/ss4.png'
-                  ],
+      'https://tosifseta.github.io/assets/shortcut/ss1.png',
+      'https://tosifseta.github.io/assets/shortcut/ss2.png',
+      'https://tosifseta.github.io/assets/shortcut/ss3.png',
+      'https://tosifseta.github.io/assets/shortcut/ss4.png'
+    ],
     type: 'macos',
     badge: 'macos',
     name: 'Shortcut Assistance',
@@ -1012,15 +831,15 @@ const projectData = {
     iconBg: 'linear-gradient(135deg,#1abc9c,#16a085)',
     iconUrl: 'https://tosifseta.github.io/assets/maccleaner/icon.png',
     screenshots: [
-                  'https://tosifseta.github.io/assets/maccleaner/ss1.png',
-                  'https://tosifseta.github.io/assets/maccleaner/ss2.png',
-                  'https://tosifseta.github.io/assets/maccleaner/ss3.png',
-                  'https://tosifseta.github.io/assets/maccleaner/ss4.png',
-                  'https://tosifseta.github.io/assets/maccleaner/ss5.png',
-                  'https://tosifseta.github.io/assets/maccleaner/ss6.png',
-                  'https://tosifseta.github.io/assets/maccleaner/ss7.png',
-                  'https://tosifseta.github.io/assets/maccleaner/ss8.png'
-                  ],
+      'https://tosifseta.github.io/assets/maccleaner/ss1.png',
+      'https://tosifseta.github.io/assets/maccleaner/ss2.png',
+      'https://tosifseta.github.io/assets/maccleaner/ss3.png',
+      'https://tosifseta.github.io/assets/maccleaner/ss4.png',
+      'https://tosifseta.github.io/assets/maccleaner/ss5.png',
+      'https://tosifseta.github.io/assets/maccleaner/ss6.png',
+      'https://tosifseta.github.io/assets/maccleaner/ss7.png',
+      'https://tosifseta.github.io/assets/maccleaner/ss8.png'
+    ],
     type: 'macos',
     badge: 'macos',
     name: 'MacCleaner – System Optimizer',
@@ -1038,30 +857,61 @@ const projectData = {
 };
 
 /* =====================================================
-   BUILD CARD SCREENSHOT STRIP
+   HERO PHONE — inject real app icons + fallback emoji grid
 ===================================================== */
-function buildScreenshotStrip(screenshots, fallbackEmoji, fallbackBg) {
-  if (!screenshots || screenshots.length === 0) {
-    return `<div class="app-card-header-fallback" style="background:${fallbackBg}">${fallbackEmoji}</div>`;
-  }
-  // Duplicate for seamless loop
-  const allImgs = [...screenshots, ...screenshots];
-  const imgs = allImgs.map(url => `<img class="ss-thumb" src="${url}" loading="lazy" alt="screenshot">`).join('');
-  return `
-    <div class="ss-strip">
-      <div class="ss-track animate">${imgs}</div>
-    </div>
-  `;
+function renderHeroAppGrid() {
+  const grid = document.getElementById('heroAppGrid');
+  // 4 live apps + 4 filler slots
+  const slots = [
+    { iconUrl: appData.affirmation.iconUrl, bg: appData.affirmation.iconBg, emoji: '🌸' },
+    { iconUrl: appData.cleanup.iconUrl,     bg: appData.cleanup.iconBg,     emoji: '🧹' },
+    { iconUrl: appData.purecheck.iconUrl,   bg: appData.purecheck.iconBg,   emoji: '🌿' },
+    { iconUrl: appData.pdfeditor.iconUrl,   bg: appData.pdfeditor.iconBg,   emoji: '📄' },
+    { iconUrl: null, bg: 'linear-gradient(135deg,#8e44ad,#9b59b6)', emoji: '📝' },
+    { iconUrl: null, bg: 'linear-gradient(135deg,#f39c12,#e67e22)', emoji: '⚡' },
+    { iconUrl: null, bg: 'linear-gradient(135deg,#1abc9c,#16a085)', emoji: '🖥' },
+    { iconUrl: null, bg: 'linear-gradient(135deg,#636e72,#2d3436)', emoji: '⚙️' },
+  ];
+  grid.innerHTML = slots.map(s => {
+    if (s.iconUrl) {
+      return `<div class="phone-app" style="background:#000">
+        <img src="${s.iconUrl}" alt="app icon" loading="lazy" onerror="this.parentElement.style.background='${s.bg}';this.parentElement.innerHTML='<span class=phone-app-emoji>${s.emoji}</span>'">
+      </div>`;
+    }
+    return `<div class="phone-app" style="background:${s.bg}"><span class="phone-app-emoji">${s.emoji}</span></div>`;
+  }).join('');
 }
 
 /* =====================================================
-   BUILD APP ICON
+   BUILD CARD — static banner (first screenshot)
 ===================================================== */
-function buildIcon(iconUrl, fallbackBg, fallbackEmoji, extraClass = 'app-icon') {
-  if (iconUrl) {
-    return `<div class="${extraClass}" style="background:#f0f0f0"><img src="${iconUrl}" alt="icon" loading="lazy"></div>`;
+function buildBanner(screenshots, fallbackEmoji, fallbackBg) {
+  if (screenshots && screenshots.length > 0) {
+    return `
+      <img
+        class="banner-img"
+        src="${screenshots[0]}"
+        alt="preview"
+        loading="lazy"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+      >
+      <div class="app-card-header-fallback" style="background:${fallbackBg};display:none">${fallbackEmoji}</div>
+    `;
   }
-  return `<div class="${extraClass}" style="background:${fallbackBg}">${fallbackEmoji}</div>`;
+  return `<div class="app-card-header-fallback" style="background:${fallbackBg}">${fallbackEmoji}</div>`;
+}
+
+/* =====================================================
+   BUILD APP ICON — same for both app cards and project cards
+===================================================== */
+function buildIcon(iconUrl, fallbackBg, fallbackEmoji) {
+  if (iconUrl) {
+    return `<div class="app-icon" style="background:#f0f0f0">
+      <img src="${iconUrl}" alt="icon" loading="lazy"
+        onerror="this.parentElement.style.background='${fallbackBg}';this.parentElement.innerHTML='${fallbackEmoji}'">
+    </div>`;
+  }
+  return `<div class="app-icon" style="background:${fallbackBg};font-size:28px;display:flex;align-items:center;justify-content:center">${fallbackEmoji}</div>`;
 }
 
 /* =====================================================
@@ -1069,14 +919,10 @@ function buildIcon(iconUrl, fallbackBg, fallbackEmoji, extraClass = 'app-icon') 
 ===================================================== */
 function renderAppCards() {
   const grid = document.getElementById('appsGrid');
-  const entries = Object.entries(appData);
-  grid.innerHTML = entries.map(([id, app]) => `
+  grid.innerHTML = Object.entries(appData).map(([id, app]) => `
     <div class="app-card reveal-scale" onclick="openModal('app','${id}')">
       <div class="app-card-header">
-        ${buildScreenshotStrip(app.screenshots, app.emoji, app.headerBg)}
-        ${(!app.screenshots || app.screenshots.length === 0)
-          ? `<div class="app-card-header-fallback" style="background:${app.headerBg}">${app.emoji}</div>`
-          : ''}
+        ${buildBanner(app.screenshots, app.emoji, app.headerBg)}
       </div>
       <div class="app-card-body">
         <div class="app-card-icon-row">
@@ -1093,22 +939,18 @@ function renderAppCards() {
 }
 
 /* =====================================================
-   RENDER OTHER PROJECT CARDS (same style as app cards)
+   RENDER OTHER PROJECT CARDS — identical structure to app cards
 ===================================================== */
 function renderProjectCards() {
   const grid = document.getElementById('projectsGrid');
-  const entries = Object.entries(projectData);
-  grid.innerHTML = entries.map(([id, proj]) => `
+  grid.innerHTML = Object.entries(projectData).map(([id, proj]) => `
     <div class="project-card-new reveal-scale" onclick="openModal('project','${id}')">
-      <div class="app-card-header" style="cursor:pointer">
-        ${buildScreenshotStrip(proj.screenshots, proj.emoji, proj.headerBg)}
-        ${(!proj.screenshots || proj.screenshots.length === 0)
-          ? `<div class="app-card-header-fallback" style="background:${proj.headerBg}">${proj.emoji}</div>`
-          : ''}
+      <div class="app-card-header">
+        ${buildBanner(proj.screenshots, proj.emoji, proj.headerBg)}
       </div>
       <div class="app-card-body">
         <div class="app-card-icon-row">
-          ${buildIcon(proj.iconUrl, proj.iconBg, proj.emoji, 'project-icon-wrap')}
+          ${buildIcon(proj.iconUrl, proj.iconBg, proj.emoji)}
           <span class="${proj.badge === 'wip' ? 'badge-wip' : 'badge-macos'}">${proj.badge === 'wip' ? 'In Progress' : 'macOS'}</span>
         </div>
         <div class="app-name">${proj.name}</div>
@@ -1121,60 +963,25 @@ function renderProjectCards() {
 }
 
 /* =====================================================
-   MODAL
+   MODAL — plain images, no device frames
 ===================================================== */
-function buildDeviceFrame(url, type, index) {
-  if (type === 'macos') {
-    const inner = url
-      ? `<img src="${url}" alt="screenshot ${index+1}" loading="lazy">`
-      : `<div class="device-mac-placeholder"><span>🖥</span><small>Screenshot ${index+1}</small></div>`;
-    return `
-      <div class="device-mac">
-        <div class="device-mac-lid">
-          <div class="device-mac-notch"></div>
-          <div class="device-mac-screen-inner">${inner}</div>
-        </div>
-        <div class="device-mac-base"></div>
-        <div class="device-mac-foot"></div>
-        <div class="device-mac-label">Screenshot ${index+1}</div>
-      </div>`;
-  } else {
-    // iPhone 14 Pro
-    const inner = url
-      ? `<img src="${url}" alt="screenshot ${index+1}" loading="lazy">`
-      : `<div class="device-ios-placeholder"><span>📱</span><small>Screenshot ${index+1}</small></div>`;
-    return `
-      <div class="device-ios">
-        <div class="device-ios-outer">
-          <div class="device-ios-screen">
-            <div class="device-ios-island"></div>
-            ${inner}
-          </div>
-        </div>
-        <div class="device-ios-label">Screenshot ${index+1}</div>
-      </div>`;
-  }
-}
-
 function openModal(source, id) {
   const data = source === 'app' ? appData[id] : projectData[id];
   if (!data) return;
 
   document.getElementById('modalHeader').style.background = data.headerBg;
 
-  // Header emoji or icon (large)
   const emojiEl = document.getElementById('modalEmoji');
   if (data.iconUrl) {
-    emojiEl.innerHTML = `<img src="${data.iconUrl}" style="width:80px;height:80px;border-radius:24px;object-fit:cover;box-shadow:0 16px 40px rgba(0,0,0,0.3)" alt="icon">`;
+    emojiEl.innerHTML = `<img src="${data.iconUrl}" style="width:80px;height:80px;border-radius:24px;object-fit:cover;box-shadow:0 16px 40px rgba(0,0,0,0.3)" alt="icon" onerror="this.parentElement.textContent='${data.emoji}'">`;
   } else {
     emojiEl.textContent = data.emoji;
   }
 
-  // Modal app icon
   const iconEl = document.getElementById('modalIcon');
   if (data.iconUrl) {
     iconEl.style.background = '#f0f0f0';
-    iconEl.innerHTML = `<img src="${data.iconUrl}" alt="icon" loading="lazy">`;
+    iconEl.innerHTML = `<img src="${data.iconUrl}" alt="icon" loading="lazy" onerror="this.parentElement.style.background='${data.iconBg}';this.parentElement.textContent='${data.emoji}'">`;
   } else {
     iconEl.style.background = data.iconBg;
     iconEl.textContent = data.emoji;
@@ -1187,23 +994,23 @@ function openModal(source, id) {
   document.getElementById('modalTech').innerHTML = data.tech.map(t => `<span class="modal-tech-tag">${t}</span>`).join('');
   document.getElementById('modalFeatures').innerHTML = data.features.map(f => `<li>${f}</li>`).join('');
 
-  // Screenshots in device frames
-  const ssTitle = document.getElementById('modalScreenshotsTitle');
+  // Plain screenshots — no device frames
   const ssEl = document.getElementById('modalScreenshots');
+  const ssTitle = document.getElementById('modalScreenshotsTitle');
   const type = data.type || 'ios';
+  const cls = type === 'macos' ? 'mac-img' : 'ios-img';
 
-  // Show 4 slots minimum, or however many screenshots provided
-  const count = Math.max(4, (data.screenshots || []).length);
-  let framesHTML = '';
-  for (let i = 0; i < count; i++) {
-    const url = (data.screenshots && data.screenshots[i]) ? data.screenshots[i] : null;
-    framesHTML += buildDeviceFrame(url, type, i);
+  if (data.screenshots && data.screenshots.length > 0) {
+    ssTitle.style.display = '';
+    ssEl.style.display = '';
+    ssEl.innerHTML = data.screenshots.map((url, i) =>
+      `<img class="modal-ss-img ${cls}" src="${url}" alt="Screenshot ${i+1}" loading="lazy">`
+    ).join('');
+  } else {
+    ssTitle.style.display = 'none';
+    ssEl.style.display = 'none';
   }
-  ssTitle.style.display = '';
-  ssEl.style.display = '';
-  ssEl.innerHTML = framesHTML;
 
-  // Actions
   const actionsEl = document.getElementById('modalActions');
   if (source === 'app' && data.storeUrl) {
     actionsEl.innerHTML = `
@@ -1232,6 +1039,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 /* =====================================================
    INIT
 ===================================================== */
+renderHeroAppGrid();
 renderAppCards();
 renderProjectCards();
 
@@ -1247,9 +1055,9 @@ const revealObs = new IntersectionObserver(entries => {
     }
   });
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
 document.querySelectorAll('.reveal, .reveal-scale').forEach(el => revealObs.observe(el));
 
-// After cards render, re-observe them
 setTimeout(() => {
   document.querySelectorAll('.reveal-scale').forEach(el => {
     if (!el.classList.contains('visible')) revealObs.observe(el);
