@@ -42,7 +42,7 @@
     .section-title{font-size:clamp(34px,5vw,56px);font-weight:800;letter-spacing:-2px;line-height:1.05;color:var(--text-primary);margin-bottom:16px}
     .section-sub{font-size:18px;color:var(--text-secondary);font-weight:300;max-width:540px;line-height:1.6}
 
-    /* HERO */
+    /* ═══ HERO ═══ */
     #hero{min-height:calc(100vh - 56px);display:flex;align-items:center;padding:100px 28px;max-width:1040px;margin:0 auto;position:relative}
     .hero-content{flex:1;position:relative;z-index:2}
     .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:7px 16px 7px 10px;font-size:13px;font-weight:500;color:var(--text-secondary);margin-bottom:36px;box-shadow:var(--shadow-sm);animation:slideDown .8s ease both}
@@ -64,57 +64,78 @@
     .btn-secondary{background:var(--surface);color:var(--text-primary);border:1px solid var(--border);box-shadow:var(--shadow-sm)}
     .btn-secondary:hover{transform:translateY(-2px);border-color:var(--border-hover);box-shadow:var(--shadow-md)}
 
-    /* HERO PHONE — iPhone 15 Pro style */
-    .hero-visual{flex:0 0 300px;display:flex;align-items:center;justify-content:center;animation:revealUp 1s ease .6s both}
-    .hero-visual-wrapper{position:relative}
+    /* ═══ HERO PHONE — real PNG frame overlay ═══ */
+    .hero-visual{flex:0 0 320px;display:flex;align-items:center;justify-content:center;animation:revealUp 1s ease .6s both}
+    .hero-visual-wrapper{position:relative;width:220px}
 
-    .phone-frame{
-      width:196px;height:416px;background:#181818;border-radius:46px;position:relative;overflow:visible;
-      box-shadow:0 0 0 1.5px #383838,0 0 0 3.5px #0d0d0d,0 50px 100px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.06);
-      transition:transform .4s cubic-bezier(.4,0,.2,1);
+    /* The phone is a positioned container — PNG frame sits on top */
+    .phone-wrap{
+      position:relative;
+      width:220px;
+      /* aspect of iPhone 14 Pro frame PNG: ~393×852 → ratio ~0.461 */
+      height:477px;
+      transition:transform .5s cubic-bezier(.4,0,.2,1);
+      filter:drop-shadow(0 40px 60px rgba(0,0,0,.35));
     }
-    .hero-visual-wrapper:hover .phone-frame{transform:rotateY(-6deg) rotateX(3deg) scale(1.02)}
-    /* volume buttons */
-    .phone-frame::before{content:'';position:absolute;left:-3px;top:92px;width:3px;height:30px;background:#2a2a2a;border-radius:2px 0 0 2px;box-shadow:0 42px 0 #2a2a2a}
-    /* power button */
-    .phone-frame::after{content:'';position:absolute;right:-3px;top:114px;width:3px;height:54px;background:#2a2a2a;border-radius:0 2px 2px 0}
+    .hero-visual-wrapper:hover .phone-wrap{transform:rotateY(-6deg) rotateX(3deg) scale(1.03)}
 
-    .phone-screen{position:absolute;inset:4px;background:linear-gradient(170deg,#1c1c1e,#2a2a2c);border-radius:42px;overflow:hidden;display:flex;flex-direction:column}
+    /* Screen area sits BEHIND the frame PNG — calibrated to the frame's inner screen */
+    .phone-screen-area{
+      position:absolute;
+      /* These values are tuned to the uploaded iPhone 14 Pro frame */
+      top: 2.2%;   /* ~top bezel */
+      left: 3.5%;
+      right: 3.5%;
+      bottom: 2.2%;
+      border-radius: 12%;
+      background:linear-gradient(170deg,#1a1a1c,#2a2a2c);
+      overflow:hidden;
+      display:flex;flex-direction:column;
+    }
 
-    /* Status bar */
-    .phone-sb{display:flex;justify-content:space-between;align-items:center;padding:13px 18px 0;flex-shrink:0}
-    .phone-time{color:#fff;font-size:12px;font-weight:700;font-family:'JetBrains Mono',monospace;letter-spacing:-.3px}
-    .phone-sb-icons{display:flex;align-items:center;gap:3px}
-    .phone-sb-bar{width:3px;background:#fff;border-radius:1px;opacity:.8}
+    /* PNG frame overlaid on top so it masks the screen content perfectly */
+    .phone-frame-png{
+      position:absolute;inset:0;
+      width:100%;height:100%;
+      object-fit:fill;
+      pointer-events:none;
+      z-index:10;
+    }
 
-    /* Dynamic Island — authentic pill */
+    /* Status bar inside screen */
+    .phone-sb{display:flex;justify-content:space-between;align-items:center;padding:12px 18px 0;flex-shrink:0;position:relative;z-index:1}
+    .phone-time{color:#fff;font-size:11px;font-weight:700;font-family:'JetBrains Mono',monospace;letter-spacing:-.3px}
+    .phone-sb-right{display:flex;align-items:center;gap:3px}
+    .phone-sb-bar{width:2.5px;background:#fff;border-radius:1px;opacity:.8}
+
+    /* Dynamic Island — pill centred at top of screen */
     .dynamic-island{
-      width:104px;height:31px;background:#000;border-radius:22px;
-      margin:3px auto 0;display:flex;align-items:center;justify-content:space-between;
-      padding:0 14px;flex-shrink:0;
-      box-shadow:inset 0 0 0 .5px rgba(255,255,255,.05);
+      width:88px;height:26px;background:#000;border-radius:18px;
+      margin:2px auto 0;display:flex;align-items:center;justify-content:space-between;
+      padding:0 12px;flex-shrink:0;position:relative;z-index:1;
+      box-shadow:inset 0 0 0 .5px rgba(255,255,255,.04);
     }
-    .di-faceid{width:13px;height:13px;border-radius:50%;border:2px solid #1e3a5a;background:#0a1a2a;display:flex;align-items:center;justify-content:center}
-    .di-faceid::after{content:'';width:5px;height:5px;border-radius:50%;background:#0a84ff;opacity:.7}
-    .di-cam{width:8px;height:8px;border-radius:50%;background:#111;border:1.5px solid #1f1f1f}
+    .di-faceid{width:12px;height:12px;border-radius:50%;border:2px solid #0a2a4a;background:#061420;display:flex;align-items:center;justify-content:center}
+    .di-faceid::after{content:'';width:4px;height:4px;border-radius:50%;background:#0a84ff;opacity:.7}
+    .di-cam{width:7px;height:7px;border-radius:50%;background:#0a0a0a;border:1px solid #1a1a1a}
 
     /* App grid */
-    .phone-app-grid{padding:10px 13px 6px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;flex-shrink:0}
-    .phone-app{aspect-ratio:1;border-radius:13px;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.45);transition:transform .2s;background:#222}
+    .phone-app-grid{padding:9px 12px 6px;display:grid;grid-template-columns:repeat(4,1fr);gap:7px;flex-shrink:0;position:relative;z-index:1}
+    .phone-app{aspect-ratio:1;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.4);transition:transform .2s;background:#222}
     .phone-app:hover{transform:scale(1.1)}
     .phone-app img{width:100%;height:100%;object-fit:cover;display:block}
-    .phone-app-emoji{font-size:16px}
+    .phone-app-emoji{font-size:15px}
 
     /* Widget */
-    .phone-widget{margin:4px 13px 0;background:rgba(255,255,255,.07);border-radius:16px;padding:12px 14px;border:1px solid rgba(255,255,255,.06)}
-    .phone-wt{color:rgba(255,255,255,.38);font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
-    .phone-wv{color:#fff;font-size:20px;font-weight:800;letter-spacing:-1px}
-    .phone-ws{color:rgba(255,255,255,.28);font-size:9px;margin-top:2px}
+    .phone-widget{margin:3px 12px 0;background:rgba(255,255,255,.07);border-radius:14px;padding:11px 13px;border:1px solid rgba(255,255,255,.06);position:relative;z-index:1}
+    .phone-wt{color:rgba(255,255,255,.38);font-size:8px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
+    .phone-wv{color:#fff;font-size:18px;font-weight:800;letter-spacing:-1px}
+    .phone-ws{color:rgba(255,255,255,.28);font-size:8px;margin-top:2px}
 
     /* Float cards */
-    .float-card{position:absolute;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:13px 17px;box-shadow:var(--shadow-md);font-size:12px;animation:float 4s ease-in-out infinite}
-    .float-card-1{top:16px;right:-96px;animation-delay:0s}
-    .float-card-2{bottom:36px;left:-114px;animation-delay:-2s}
+    .float-card{position:absolute;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:13px 17px;box-shadow:var(--shadow-md);font-size:12px;animation:float 4s ease-in-out infinite;z-index:20}
+    .float-card-1{top:10px;right:-110px;animation-delay:0s}
+    .float-card-2{bottom:40px;left:-120px;animation-delay:-2s}
     @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
     .float-label{color:var(--text-tertiary);font-size:10px;margin-bottom:2px;text-transform:uppercase;letter-spacing:.08em;font-weight:600}
     .float-value{color:var(--text-primary);font-weight:700;font-size:14px}
@@ -135,25 +156,78 @@
     .stat-unit{font-size:22px;font-weight:400;color:var(--text-tertiary)}
     .stat-label{font-size:14px;color:var(--text-secondary);margin-top:10px}
 
-    /* CARDS — shared between app + project */
+    /* ═══════════════════════════════════
+       APP / PROJECT CARDS
+    ═══════════════════════════════════ */
     .apps-grid,.projects-grid-new{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-top:48px}
 
     .app-card,.project-card-new{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-sm);transition:all .4s cubic-bezier(.4,0,.2,1);cursor:pointer;position:relative}
     .app-card:hover,.project-card-new:hover{transform:translateY(-8px) scale(1.01);box-shadow:var(--shadow-xl);border-color:var(--border-hover)}
-    .app-card:hover .app-icon,.project-card-new:hover .app-icon{transform:scale(1.1) rotate(-3deg)}
+    .app-card:hover .app-icon,.project-card-new:hover .app-icon{transform:scale(1.08) rotate(-3deg)}
     .app-card:hover .expand-hint,.project-card-new:hover .expand-hint{opacity:1;transform:translateY(0)}
 
-    /* Banner */
-    .card-banner{height:178px;position:relative;overflow:hidden;background:#f0f0f0}
-    .card-banner::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,var(--surface) 100%);pointer-events:none;z-index:2}
-    .card-banner-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block;z-index:1}
-    .card-banner-img.mac{object-position:center center}
-    .card-banner-fallback{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;font-size:58px}
+    /* ── CARD BANNER — icon-based design ──
+       Big blurred icon as background, sharp icon centred, gradient overlay */
+    .card-banner{
+      height:176px;position:relative;overflow:hidden;
+      display:flex;align-items:center;justify-content:center;
+    }
+    /* Blurred icon fills the whole banner as bg */
+    .banner-bg-icon{
+      position:absolute;inset:-20px;
+      width:calc(100% + 40px);height:calc(100% + 40px);
+      object-fit:cover;
+      filter:blur(28px) saturate(1.6) brightness(.85);
+      transform:scale(1.1);
+      display:block;
+    }
+    /* Colour overlay so it doesn't look raw */
+    .banner-color-overlay{
+      position:absolute;inset:0;
+      background:inherit; /* set via JS */
+      opacity:.35;
+      mix-blend-mode:multiply;
+    }
+    /* Subtle dark gradient at bottom to merge with card body */
+    .banner-fade{
+      position:absolute;inset:0;
+      background:linear-gradient(to bottom,rgba(0,0,0,.08) 0%,rgba(0,0,0,.55) 100%);
+      pointer-events:none;z-index:2;
+    }
+    /* Screenshot strip inside banner — small previews of actual screenshots */
+    .banner-ss-strip{
+      position:absolute;bottom:12px;left:0;right:0;
+      display:flex;gap:6px;justify-content:center;align-items:flex-end;
+      z-index:3;padding:0 14px;
+    }
+    .banner-ss-thumb{
+      height:64px;width:auto;
+      border-radius:8px;
+      object-fit:cover;object-position:top;
+      border:1.5px solid rgba(255,255,255,.25);
+      box-shadow:0 4px 12px rgba(0,0,0,.4);
+      flex-shrink:0;
+      display:block;
+    }
+    .banner-ss-thumb.mac-thumb{
+      height:44px;width:auto;
+      border-radius:6px;
+    }
+    /* Centre icon on banner */
+    .banner-icon-centre{
+      position:relative;z-index:4;
+      width:72px;height:72px;border-radius:18px;overflow:hidden;
+      box-shadow:0 8px 28px rgba(0,0,0,.45),0 0 0 1.5px rgba(255,255,255,.15);
+      display:flex;align-items:center;justify-content:center;
+      background:#e8e8e8;
+      flex-shrink:0;
+    }
+    .banner-icon-centre img{width:100%;height:100%;object-fit:cover;display:block}
 
     .card-body{padding:16px 22px 20px}
     .card-icon-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 
-    .app-icon{width:54px;height:54px;border-radius:15px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:25px;box-shadow:0 5px 16px rgba(0,0,0,.18);transition:transform .3s ease;flex-shrink:0;background:#e8e8e8}
+    .app-icon{width:52px;height:52px;border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 5px 16px rgba(0,0,0,.18);transition:transform .3s ease;flex-shrink:0;background:#e8e8e8}
     .app-icon img{width:100%;height:100%;object-fit:cover;display:block}
 
     .app-store-btn{display:inline-flex;align-items:center;gap:5px;background:var(--text-primary);color:#fff;border-radius:100px;padding:7px 15px;font-size:11px;font-weight:700;text-decoration:none;letter-spacing:.05em;text-transform:uppercase;transition:all .25s}
@@ -168,20 +242,25 @@
     .tag:hover{background:var(--accent);color:#fff}
     .expand-hint{font-size:11px;color:var(--text-tertiary);text-align:center;padding:0 22px 13px;font-weight:500;opacity:0;transform:translateY(4px);transition:all .3s ease}
 
-    /* MODAL */
+    /* ═══════════════════════════════════
+       MODAL
+    ═══════════════════════════════════ */
     .modal-overlay{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.55);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .4s cubic-bezier(.4,0,.2,1);padding:24px}
     .modal-overlay.active{opacity:1;visibility:visible}
     .modal{background:var(--surface);border-radius:var(--radius-xl);max-width:700px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow-xl);transform:translateY(40px) scale(.95);transition:transform .4s cubic-bezier(.4,0,.2,1);border:1px solid var(--border);scrollbar-width:none;-ms-overflow-style:none}
     .modal::-webkit-scrollbar{display:none}
     .modal-overlay.active .modal{transform:translateY(0) scale(1)}
 
-    .modal-header{height:220px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:#eee}
-    .modal-hdr-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block;z-index:0;opacity:.5;filter:blur(3px) saturate(1.5)}
-    .modal-hdr-bg.mac{object-position:center center}
-    .modal-hdr-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.05),rgba(0,0,0,.5));z-index:1}
+    /* Modal header — same icon-banner design as card */
+    .modal-header{
+      height:240px;display:flex;align-items:center;justify-content:center;
+      position:relative;overflow:hidden;
+    }
+    .modal-hdr-bg{position:absolute;inset:-20px;width:calc(100% + 40px);height:calc(100% + 40px);object-fit:cover;filter:blur(32px) saturate(1.8) brightness(.75);transform:scale(1.1);display:block;z-index:0}
+    .modal-hdr-fade{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.05),rgba(0,0,0,.6));z-index:1}
     .modal-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.35);backdrop-filter:blur(10px);border:none;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:10}
     .modal-close:hover{background:rgba(0,0,0,.65);transform:scale(1.1)}
-    .modal-hdr-icon{position:relative;z-index:2;width:82px;height:82px;border-radius:22px;overflow:hidden;box-shadow:0 16px 40px rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;font-size:38px;background:#e8e8e8}
+    .modal-hdr-icon{position:relative;z-index:2;width:88px;height:88px;border-radius:24px;overflow:hidden;box-shadow:0 16px 40px rgba(0,0,0,.5),0 0 0 2px rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:40px;background:#e8e8e8}
     .modal-hdr-icon img{width:100%;height:100%;object-fit:cover;display:block}
 
     .modal-body{padding:26px 30px 34px}
@@ -193,14 +272,24 @@
     .modal-desc{font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border)}
     .modal-sec-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:12px}
 
-    /* Screenshots — plain images, NO scrollbar, NO shadow */
+    /* Screenshots — plain images, no scrollbar, no shadow */
     .modal-ss-wrap{display:flex;gap:10px;overflow-x:auto;margin-bottom:24px;scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch}
     .modal-ss-wrap::-webkit-scrollbar{display:none}
-    .modal-ss-img{flex-shrink:0;border-radius:12px;display:block;border:1px solid var(--border);object-fit:cover;background:#f0f0f0}
-    /* iOS: tall portrait */
-    .modal-ss-img.ios{height:260px;width:120px;object-position:top}
-    /* macOS: landscape */
-    .modal-ss-img.mac{height:160px;width:auto;max-width:280px}
+
+    /* Each img has explicit dimensions so it's never zero-size */
+    .modal-ss-img{
+      flex-shrink:0;border-radius:12px;display:block;
+      border:1px solid rgba(0,0,0,.07);
+      background:#f0f0f0;  /* placeholder colour while loading */
+    }
+    .modal-ss-img.ss-ios{
+      width:120px;height:260px;
+      object-fit:cover;object-position:top center;
+    }
+    .modal-ss-img.ss-mac{
+      height:160px;width:auto;max-width:300px;min-width:200px;
+      object-fit:cover;object-position:center;
+    }
 
     .modal-tech-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
     .modal-tech-tag{font-size:13px;font-weight:500;padding:6px 16px;border-radius:100px;background:var(--accent-soft);color:var(--accent);font-family:'JetBrains Mono',monospace;border:1px solid var(--accent-mid)}
@@ -236,7 +325,8 @@
     .reveal.visible{opacity:1;transform:translateY(0)}
     .reveal-scale{opacity:0;transform:translateY(24px) scale(.97);transition:opacity .6s cubic-bezier(.4,0,.2,1),transform .6s cubic-bezier(.4,0,.2,1)}
     .reveal-scale.visible{opacity:1;transform:translateY(0) scale(1)}
-    .stagger>*:nth-child(1){transition-delay:0s}.stagger>*:nth-child(2){transition-delay:.08s}.stagger>*:nth-child(3){transition-delay:.16s}.stagger>*:nth-child(4){transition-delay:.24s}
+    .stagger>*:nth-child(1){transition-delay:0s}.stagger>*:nth-child(2){transition-delay:.08s}
+    .stagger>*:nth-child(3){transition-delay:.16s}.stagger>*:nth-child(4){transition-delay:.24s}
 
     @media(max-width:768px){
       #hero{flex-direction:column;gap:48px;padding-top:72px}
@@ -246,7 +336,7 @@
       .nav-links{display:none}
       .section{padding:64px 20px}
       .modal{max-height:92vh}
-      .modal-header{height:160px}
+      .modal-header{height:180px}
     }
     @media(min-width:769px) and (max-width:1024px){.projects-grid-new{grid-template-columns:1fr 1fr}}
   </style>
@@ -282,17 +372,17 @@
   </div>
   <div class="hero-visual">
     <div class="hero-visual-wrapper">
-      <div class="phone-frame">
-        <div class="phone-screen">
+      <div class="phone-wrap">
+        <!-- Screen content sits behind the PNG frame -->
+        <div class="phone-screen-area">
           <div class="phone-sb">
             <span class="phone-time">9:41</span>
-            <div class="phone-sb-icons">
-              <div class="phone-sb-bar" style="height:6px"></div>
-              <div class="phone-sb-bar" style="height:8px"></div>
-              <div class="phone-sb-bar" style="height:10px"></div>
-              <div class="phone-sb-bar" style="height:12px"></div>
-              <span style="color:rgba(255,255,255,.6);font-size:9px;margin-left:2px">▲</span>
-              <span style="color:rgba(255,255,255,.7);font-size:10px">🔋</span>
+            <div class="phone-sb-right">
+              <div class="phone-sb-bar" style="height:5px"></div>
+              <div class="phone-sb-bar" style="height:7px"></div>
+              <div class="phone-sb-bar" style="height:9px"></div>
+              <div class="phone-sb-bar" style="height:11px"></div>
+              <span style="color:rgba(255,255,255,.65);font-size:8px;margin-left:3px">▲ 🔋</span>
             </div>
           </div>
           <div class="dynamic-island">
@@ -306,6 +396,8 @@
             <div class="phone-ws">iOS · 3+ years shipping</div>
           </div>
         </div>
+        <!-- Real iPhone 14 Pro frame PNG overlaid on top -->
+        <img class="phone-frame-png" src="iphone-frame.png" alt="" draggable="false" />
       </div>
       <div class="float-card float-card-1">
         <div class="float-label">Current Role</div>
@@ -402,7 +494,6 @@
 </section>
 
 </main>
-
 <footer>Designed & built by Tosif Seta · iOS Developer · Ahmedabad · © 2026</footer>
 
 <!-- MODAL -->
@@ -410,7 +501,7 @@
   <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-header" id="modalHeader">
       <button class="modal-close" onclick="closeModal()">✕</button>
-      <div class="modal-hdr-overlay"></div>
+      <div class="modal-hdr-fade"></div>
       <div class="modal-hdr-icon" id="modalHdrIcon"></div>
     </div>
     <div class="modal-body">
@@ -419,7 +510,10 @@
         <div><div class="modal-app-name" id="modalName"></div><div class="modal-app-subtitle" id="modalSubtitle"></div></div>
       </div>
       <div class="modal-desc" id="modalDesc"></div>
-      <div id="modalSsSection"><div class="modal-sec-title">Screenshots</div><div class="modal-ss-wrap" id="modalSs"></div></div>
+      <div id="modalSsSection">
+        <div class="modal-sec-title">Screenshots</div>
+        <div class="modal-ss-wrap" id="modalSs"></div>
+      </div>
       <div class="modal-sec-title">Technologies</div>
       <div class="modal-tech-tags" id="modalTech"></div>
       <div class="modal-sec-title">Key Features</div>
@@ -446,47 +540,33 @@ const projectData = {
 };
 
 /* ── Dynamic gradient from icon ── */
-const rgbCache = {};
+const rgbCache={};
 function getIconRgb(url){
   return new Promise(res=>{
     if(rgbCache[url]){res(rgbCache[url]);return}
-    const img=new Image(); img.crossOrigin='anonymous';
+    const img=new Image();img.crossOrigin='anonymous';
     img.onload=()=>{
       try{
-        const c=document.createElement('canvas'); c.width=20;c.height=20;
-        const x=c.getContext('2d'); x.drawImage(img,0,0,20,20);
-        const d=x.getImageData(0,0,20,20).data;
+        const c=document.createElement('canvas');c.width=16;c.height=16;
+        const x=c.getContext('2d');x.drawImage(img,0,0,16,16);
+        const d=x.getImageData(0,0,16,16).data;
         let r=0,g=0,b=0,n=0;
         for(let i=0;i<d.length;i+=4)if(d[i+3]>100){r+=d[i];g+=d[i+1];b+=d[i+2];n++}
         if(n){const v=`${~~(r/n)},${~~(g/n)},${~~(b/n)}`;rgbCache[url]=v;res(v)}else res(null)
       }catch{res(null)}
     };
-    img.onerror=()=>res(null);
-    img.src=url;
+    img.onerror=()=>res(null);img.src=url;
   })
 }
 function rgbToGrad(rgb){
   if(!rgb)return null;
   const[r,g,b]=rgb.split(',').map(Number);
-  return `linear-gradient(135deg,rgb(${r},${g},${b}),rgb(${Math.min(255,r+70)},${Math.min(255,g+60)},${Math.min(255,b+80)}))`;
+  return `linear-gradient(145deg,rgb(${Math.max(0,r-20)},${Math.max(0,g-20)},${Math.max(0,b-20)}),rgb(${Math.min(255,r+60)},${Math.min(255,g+55)},${Math.min(255,b+75)}))`;
 }
 
-/* ── Build helpers ── */
-function mkIcon(iconUrl,fallBg,fallEmoji){
-  const esc=fallEmoji.replace(/'/g,"\\'");
-  if(iconUrl) return `<div class="app-icon"><img src="${iconUrl}" crossorigin="anonymous" loading="lazy" onerror="this.parentElement.style.background='${fallBg}';this.parentElement.innerHTML='${esc}'"></div>`;
-  return `<div class="app-icon" style="background:${fallBg};display:flex;align-items:center;justify-content:center;font-size:25px">${fallEmoji}</div>`;
-}
-function mkBanner(ss,type,fallBg,fallEmoji){
-  const isMac=type==='macos', cls=isMac?'mac':'';
-  if(ss&&ss.length)
-    return `<img class="card-banner-img ${cls}" src="${ss[0]}" crossorigin="anonymous" loading="lazy" alt="preview" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="card-banner-fallback" style="background:${fallBg};display:none">${fallEmoji}</div>`;
-  return `<div class="card-banner-fallback" style="background:${fallBg}">${fallEmoji}</div>`;
-}
-
-/* ── Hero phone ── */
+/* ── Hero phone app icons ── */
 function renderHero(){
-  const all=[
+  const slots=[
     {u:appData.affirmation.iconUrl,bg:appData.affirmation.iconBg,e:'🌸'},
     {u:appData.cleanup.iconUrl,bg:appData.cleanup.iconBg,e:'🧹'},
     {u:appData.purecheck.iconUrl,bg:appData.purecheck.iconBg,e:'🌿'},
@@ -496,111 +576,108 @@ function renderHero(){
     {u:projectData.maccleaner.iconUrl,bg:projectData.maccleaner.iconBg,e:'🖥'},
     {u:null,bg:'linear-gradient(135deg,#636e72,#2d3436)',e:'⚙️'},
   ];
-  document.getElementById('heroAppGrid').innerHTML=all.map(s=>{
+  document.getElementById('heroAppGrid').innerHTML=slots.map(s=>{
     if(s.u) return `<div class="phone-app"><img src="${s.u}" crossorigin="anonymous" loading="lazy" onerror="this.parentElement.style.background='${s.bg}';this.parentElement.innerHTML='<span class=phone-app-emoji>${s.e}</span>'"></div>`;
     return `<div class="phone-app" style="background:${s.bg}"><span class="phone-app-emoji">${s.e}</span></div>`;
   }).join('');
 }
 
-/* ── Cards ── */
+/* ── Build card banner — icon blurred as bg + screenshot thumbnails ── */
+function buildBanner(item){
+  const isMac=item.type==='macos';
+  const thumbCls=isMac?'banner-ss-thumb mac-thumb':'banner-ss-thumb';
+  // Show up to 3 screenshot thumbs at bottom of banner
+  const thumbCount=Math.min(3,item.screenshots?item.screenshots.length:0);
+  let thumbsHtml='';
+  for(let i=0;i<thumbCount;i++){
+    thumbsHtml+=`<img class="${thumbCls}" src="${item.screenshots[i]}" crossorigin="anonymous" loading="lazy" alt="" onerror="this.style.display='none'">`;
+  }
+
+  return `
+    <div class="card-banner" style="background:${item.iconBg}">
+      ${item.iconUrl?`<img class="banner-bg-icon" src="${item.iconUrl}" crossorigin="anonymous" loading="lazy" alt="" onerror="this.style.display='none'">`:''}
+      <div class="banner-color-overlay" style="background:${item.iconBg}"></div>
+      <div class="banner-fade"></div>
+      <div class="banner-icon-centre">
+        ${item.iconUrl?`<img src="${item.iconUrl}" crossorigin="anonymous" loading="lazy" alt="${item.name}" onerror="this.parentElement.style.background='${item.iconBg}';this.style.display='none'">`:`<span style="font-size:32px">${item.emoji}</span>`}
+      </div>
+      ${thumbsHtml?`<div class="banner-ss-strip">${thumbsHtml}</div>`:''}
+    </div>`;
+}
+
+/* ── Render live app cards ── */
 function renderAppCards(){
   const g=document.getElementById('appsGrid');
   g.innerHTML=Object.entries(appData).map(([id,a])=>`
     <div class="app-card reveal-scale" onclick="openModal('app','${id}')">
-      <div class="card-banner">${mkBanner(a.screenshots,a.type,a.iconBg,a.emoji)}</div>
+      ${buildBanner(a)}
       <div class="card-body">
-        <div class="card-icon-row">${mkIcon(a.iconUrl,a.iconBg,a.emoji)}<a href="${a.storeUrl}" target="_blank" class="app-store-btn" onclick="event.stopPropagation()">↗ Store</a></div>
-        <div class="app-name">${a.name}</div><div class="app-tagline">${a.subtitle}</div>
+        <div class="card-icon-row">
+          <div class="app-icon">${a.iconUrl?`<img src="${a.iconUrl}" crossorigin="anonymous" loading="lazy" alt="" onerror="this.parentElement.style.background='${a.iconBg}';this.style.display='none'">`:`<span>${a.emoji}</span>`}</div>
+          <a href="${a.storeUrl}" target="_blank" class="app-store-btn" onclick="event.stopPropagation()">↗ Store</a>
+        </div>
+        <div class="app-name">${a.name}</div>
+        <div class="app-tagline">${a.subtitle}</div>
         <div class="app-tags">${a.tech.slice(0,3).map(t=>`<span class="tag">${t}</span>`).join('')}</div>
       </div>
       <div class="expand-hint">Tap to see details & screenshots →</div>
     </div>`).join('');
-  applyDynGrad(appData,'appsGrid');
 }
 
+/* ── Render other project cards ── */
 function renderProjectCards(){
   const g=document.getElementById('projectsGrid');
   g.innerHTML=Object.entries(projectData).map(([id,p])=>`
     <div class="project-card-new reveal-scale" onclick="openModal('project','${id}')">
-      <div class="card-banner">${mkBanner(p.screenshots,p.type,p.iconBg,p.emoji)}</div>
+      ${buildBanner(p)}
       <div class="card-body">
-        <div class="card-icon-row">${mkIcon(p.iconUrl,p.iconBg,p.emoji)}<span class="${p.badge==='wip'?'badge-wip':'badge-macos'}">${p.badge==='wip'?'In Progress':'macOS'}</span></div>
-        <div class="app-name">${p.name}</div><div class="app-tagline">${p.tagline}</div>
+        <div class="card-icon-row">
+          <div class="app-icon">${p.iconUrl?`<img src="${p.iconUrl}" crossorigin="anonymous" loading="lazy" alt="" onerror="this.parentElement.style.background='${p.iconBg}';this.style.display='none'">`:`<span>${p.emoji}</span>`}</div>
+          <span class="${p.badge==='wip'?'badge-wip':'badge-macos'}">${p.badge==='wip'?'In Progress':'macOS'}</span>
+        </div>
+        <div class="app-name">${p.name}</div>
+        <div class="app-tagline">${p.tagline}</div>
         <div class="app-tags">${p.tech.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
       </div>
       <div class="expand-hint">Tap to see details →</div>
     </div>`).join('');
-  applyDynGrad(projectData,'projectsGrid');
-}
-
-function applyDynGrad(dataObj,gridId){
-  const keys=Object.keys(dataObj);
-  keys.forEach((id,idx)=>{
-    const item=dataObj[id];
-    if(!item.iconUrl)return;
-    getIconRgb(item.iconUrl).then(rgb=>{
-      const grad=rgbToGrad(rgb); if(!grad)return;
-      const grid=document.getElementById(gridId); if(!grid)return;
-      const falls=grid.querySelectorAll('.card-banner-fallback');
-      if(falls[idx])falls[idx].style.background=grad;
-      // also tint the icon bg if icon failed to load
-      const icons=grid.querySelectorAll('.app-icon');
-      if(icons[idx]&&!icons[idx].querySelector('img'))icons[idx].style.background=grad;
-    });
-  });
 }
 
 /* ── Modal ── */
-function mkModalIcon(iconUrl,fallBg,fallEmoji,cls,sz){
-  const esc=fallEmoji.replace(/'/g,"\\'");
-  if(iconUrl){
-    const el=document.createElement('div'); el.className=cls; el.style.background='#e8e8e8';
-    const img=new Image(); img.crossOrigin='anonymous'; img.src=iconUrl; img.alt='icon';
-    img.onerror=()=>{el.style.background=fallBg;el.textContent=fallEmoji};
-    el.appendChild(img); return el;
-  }
-  const el=document.createElement('div'); el.className=cls;
-  el.style.cssText=`background:${fallBg};display:flex;align-items:center;justify-content:center;font-size:${sz}px`;
-  el.textContent=fallEmoji; return el;
-}
-
 function openModal(src,id){
-  const data=src==='app'?appData[id]:projectData[id]; if(!data)return;
+  const data=src==='app'?appData[id]:projectData[id];if(!data)return;
   const isMac=data.type==='macos';
 
-  /* Header background — blurred first screenshot */
+  /* Header — blurred icon as bg */
   const hdr=document.getElementById('modalHeader');
   hdr.querySelectorAll('.modal-hdr-bg').forEach(e=>e.remove());
   hdr.style.background=data.iconBg;
-  if(data.screenshots&&data.screenshots.length){
+  if(data.iconUrl){
     const bg=document.createElement('img');
-    bg.className='modal-hdr-bg'+(isMac?' mac':'');
-    bg.crossOrigin='anonymous'; bg.src=data.screenshots[0]; bg.alt='';
+    bg.className='modal-hdr-bg';bg.crossOrigin='anonymous';bg.src=data.iconUrl;bg.alt='';
     bg.onerror=()=>bg.remove();
     hdr.insertBefore(bg,hdr.firstChild);
   }
 
   /* Header icon */
   const hi=document.getElementById('modalHdrIcon');
-  hi.innerHTML='';
+  hi.innerHTML='';hi.style.background='#e8e8e8';
   if(data.iconUrl){
-    hi.style.background='#e8e8e8';
-    const img=new Image(); img.crossOrigin='anonymous'; img.src=data.iconUrl; img.alt='icon';
-    img.style.cssText='width:100%;height:100%;object-fit:cover;display:block;border-radius:22px';
+    const img=document.createElement('img');img.crossOrigin='anonymous';img.src=data.iconUrl;img.alt='icon';
+    img.style.cssText='width:100%;height:100%;object-fit:cover;display:block';
     img.onerror=()=>{hi.style.background=data.iconBg;hi.textContent=data.emoji};
     hi.appendChild(img);
-  } else {hi.style.background=data.iconBg;hi.textContent=data.emoji}
+  }else{hi.style.background=data.iconBg;hi.textContent=data.emoji}
 
   /* Body icon */
   const bi=document.getElementById('modalIcon');
-  bi.innerHTML='';
+  bi.innerHTML='';bi.style.background='#e8e8e8';
   if(data.iconUrl){
-    bi.style.background='#e8e8e8';
-    const img=new Image(); img.crossOrigin='anonymous'; img.src=data.iconUrl; img.alt='icon';
+    const img=document.createElement('img');img.crossOrigin='anonymous';img.src=data.iconUrl;img.alt='icon';
     img.style.cssText='width:100%;height:100%;object-fit:cover;display:block';
     img.onerror=()=>{bi.style.background=data.iconBg;bi.textContent=data.emoji};
     bi.appendChild(img);
-  } else {bi.style.background=data.iconBg;bi.textContent=data.emoji}
+  }else{bi.style.background=data.iconBg;bi.textContent=data.emoji}
 
   document.getElementById('modalName').textContent=data.name;
   document.getElementById('modalSubtitle').textContent=data.subtitle;
@@ -608,22 +685,22 @@ function openModal(src,id){
   document.getElementById('modalTech').innerHTML=data.tech.map(t=>`<span class="modal-tech-tag">${t}</span>`).join('');
   document.getElementById('modalFeatures').innerHTML=data.features.map(f=>`<li>${f}</li>`).join('');
 
-  /* Screenshots */
-  const ssEl=document.getElementById('modalSs');
+  /* Screenshots — explicit sized img tags so they're never zero height */
+  const ssWrap=document.getElementById('modalSs');
   const ssSec=document.getElementById('modalSsSection');
   if(data.screenshots&&data.screenshots.length){
     ssSec.style.display='';
-    const cls=isMac?'mac':'ios';
-    ssEl.innerHTML=data.screenshots.map((u,i)=>
-      `<img class="modal-ss-img ${cls}" src="${u}" crossorigin="anonymous" loading="lazy" alt="Screenshot ${i+1}" onerror="this.style.display='none'">`
+    const cls=isMac?'ss-mac':'ss-ios';
+    ssWrap.innerHTML=data.screenshots.map((url,i)=>
+      `<img class="modal-ss-img ${cls}" src="${url}" crossorigin="anonymous" loading="${i<3?'eager':'lazy'}" alt="Screenshot ${i+1}" onerror="this.style.display='none'">`
     ).join('');
-  } else ssSec.style.display='none';
+  }else{ssSec.style.display='none'}
 
   /* Actions */
   const act=document.getElementById('modalActions');
   if(src==='app'&&data.storeUrl){
     act.innerHTML=`<a href="${data.storeUrl}" target="_blank" class="modal-btn-store"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View on App Store</a>`;
-  } else {
+  }else{
     act.innerHTML=`<span style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:100px;border:1px solid var(--border);font-size:14px;font-weight:600;color:var(--text-secondary)">${data.badge==='wip'?'🚧 In Progress':'🖥 macOS Project'}</span>`;
   }
 
@@ -639,7 +716,7 @@ function closeModal(e){
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 
 /* ── Init ── */
-renderHero(); renderAppCards(); renderProjectCards();
+renderHero();renderAppCards();renderProjectCards();
 
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(en=>{
