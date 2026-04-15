@@ -570,44 +570,73 @@ var appData = {
 
 var projectData = {
   resumebuilder: {
-    emoji:'📝', iconColor:'#8e44ad',
-    iconBg:'linear-gradient(135deg,#8e44ad,#9b59b6)',
-    bannerTint:'rgba(142,68,173,1)',
-    iconUrl: B+'/resumeit/icon.png',
-    ssBase: B+'/resumeit', ssMax:6,
-    type:'ios', badge:'wip',
-    name:'ResumeIt : AI Resume Builder', subtitle:'iOS \u2014 In Progress',
-    tagline:'SwiftUI & SwiftData resume builder with LLM-powered content suggestions and AI-driven rewrites.',
-    desc:'iOS app in SwiftUI & SwiftData — customizable templates or LLM API for smart AI-powered resume content.',
-    tech:['SwiftUI','SwiftData','LLM API'],
-    features:['Resume templates with drag-and-drop ordering','LLM-powered content rewriting','Export to PDF with custom layout','SwiftData persistence for drafts']
-  },
+    emoji: '📝', 
+    iconColor: '#8e44ad',
+    iconBg: 'linear-gradient(135deg, #8e44ad, #9b59b6)',
+    bannerTint: 'rgba(142, 68, 173, 1)',
+    iconUrl: B + '/resumeit/icon.png',
+    ssBase: B + '/resumeit', 
+    ssMax: 6,
+    type: 'ios', 
+    badge: 'wip',
+    name: 'ResumeIt: AI Resume CV Maker', 
+    subtitle: 'iOS — In Progress (R&D Phase)',
+    desc: 'A next-generation career tool built with SwiftUI and SwiftData. It utilizes advanced AI APIs to parse legacy documents, generate high-impact professional content, and design ATS-optimized resumes and cover letters.',
+    tech: ['SwiftUI', 'SwiftData', 'AI API Integration', 'PDFKit', 'JSON Parsing'],
+    features: [
+        'AI Data Extraction: Automatically parses old resumes to populate modern profiles using intelligent text analysis.',
+        'Content Optimization: Smart suggestions for professional summaries and experience descriptions via AI APIs.',
+        'SwiftData Architecture: Leveraging modern local persistence for seamless draft management and offline editing.',
+        'ATS-Ready Templates: Dynamic, drag-and-drop resume layouts designed to pass modern Applicant Tracking Systems.',
+        'Cover Letter Generator: Context-aware AI assistant that crafts personalized cover letters based on specific job roles.',
+        'PDF Export Engine: High-fidelity PDF rendering with custom layout support for professional printing.'
+    ]
+},
   shortcut: {
-    emoji:'⚡', iconColor:'#f39c12',
-    iconBg:'linear-gradient(135deg,#f39c12,#e67e22)',
-    bannerTint:'rgba(243,156,18,1)',
-    iconUrl: B+'/shortcut/icon.png',
-    ssBase: B+'/shortcut', ssMax:4,
-    type:'macos', badge:'macos',
-    name:'Shortcut Assistance', subtitle:'macOS Utility',
-    tagline:'5,000+ predefined shortcut URLs with custom global hotkeys for instant browser launch on macOS.',
-    desc:'macOS productivity app with 5,000+ predefined shortcut URLs. Assign global hotkeys for instant browser launch from anywhere.',
-    tech:['macOS','SwiftUI','Carbon/AppKit'],
-    features:['5,000+ predefined shortcut URL database','Global hotkey via Carbon framework','Instant browser launch','SwiftUI settings panel']
-  },
+    emoji: '⚡', 
+    iconColor: '#f39c12',
+    iconBg: 'linear-gradient(135deg, #f39c12, #e67e22)',
+    bannerTint: 'rgba(243, 156, 18, 1)',
+    iconUrl: B + '/shortcut/icon.png',
+    ssBase: B + '/shortcut', 
+    ssMax: 4,
+    type: 'macos', 
+    badge: 'macos',
+    name: 'Shortcut Assistant', 
+    subtitle: 'macOS Productivity Suite',
+    desc: 'A high-efficiency macOS utility designed to eliminate workflow friction. Features a database of 5,000+ optimized shortcuts with system-wide global hotkey support for instant browser-based navigation.',
+    tech: ['macOS', 'SwiftUI', 'Carbon Framework', 'AppKit', 'MVVM'],
+    features: [
+        'Global Hotkeys: Low-level implementation using Carbon to trigger actions from any active application.',
+        'Massive Shortcut Library: Pre-indexed database of 5,000+ production, social, and developer URLs.',
+        'Zero-Latency Launch: Optimized for rapid browser invocation with custom user-defined key combos.',
+        'Native macOS UX: Clean, modern settings panel built entirely with SwiftUI for the desktop environment.',
+        'Robust Architecture: Decoupled MVVM structure ensuring stability across different macOS versions.'
+    ]
+},
   maccleaner: {
-    emoji:'🖥', iconColor:'#1abc9c',
-    iconBg:'linear-gradient(135deg,#1abc9c,#16a085)',
-    bannerTint:'rgba(26,188,156,1)',
-    iconUrl: B+'/maccleaner/icon.png',
-    ssBase: B+'/maccleaner', ssMax:8,
-    type:'macos', badge:'macos',
-    name:'MacCleaner \u2013 System Optimizer', subtitle:'macOS Utility',
-    tagline:'Deep scan and remove junk files, cache, and large unused files in one click with concurrent GCD operations.',
-    desc:'macOS utility to scan and remove junk files and cache using FileManager and GCD for concurrent scanning.',
-    tech:['macOS','SwiftUI','FileManager','GCD'],
-    features:['Deep scan of system caches','Concurrent GCD operations','One-click cleanup with size breakdown','Safe mode — preview before delete']
-  }
+    emoji: '🖥', 
+    iconColor: '#1abc9c',
+    iconBg: 'linear-gradient(135deg, #1abc9c, #16a085)',
+    bannerTint: 'rgba(26, 188, 156, 1)',
+    iconUrl: B + '/maccleaner/icon.png',
+    ssBase: B + '/maccleaner', 
+    ssMax: 8,
+    type: 'macos', 
+    badge: 'macos',
+    name: 'MacCleaner: Pro Optimizer', 
+    subtitle: 'macOS System Utility',
+    desc: 'A high-performance system maintenance tool built for macOS. It features a concurrent scanning engine that targets deep system junk, developer-specific bloat, and oversized "ghost" files to reclaim workstation performance.',
+    tech: ['macOS', 'SwiftUI', 'FileManager', 'GCD', 'AppKit'],
+    features: [
+        'Advanced Scanning Engine: Utilizes Grand Central Dispatch (GCD) for high-speed, multi-threaded file system traversal.',
+        'Developer-First Cleanup: Specialized modules for purging Xcode Derived Data, iOS Device Support, and Android Studio caches.',
+        'Intelligent File Analysis: Identifies and categorizes oversized and dormant files for rapid storage optimization.',
+        'App Uninstaller Suite: Deep-links to application containers to remove leftover library files and hidden caches.',
+        'Safe-Scan Protocols: Implements a "Preview-First" architecture to ensure critical system files remain protected.',
+        'Native macOS Experience: A pixel-perfect SwiftUI interface designed specifically for the macOS desktop aesthetic.'
+    ]
+}
 };
 
 /* ── Hero phone icons ── */
