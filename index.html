@@ -338,7 +338,7 @@
   <div class="stats-grid stagger">
     <div class="stat-card reveal-scale"><div class="stat-num">5<span class="stat-unit">+</span></div><div class="stat-label">Production Apps Shipped</div></div>
     <div class="stat-card reveal-scale"><div class="stat-num">3.5<span class="stat-unit">yr</span></div><div class="stat-label">Native Apple Development</div></div>
-    <div class="stat-card reveal-scale"><div class="stat-num">iOS<span class="stat-unit"> + MacOS</span></div><div class="stat-label">Multi-Platform Expert</div></div>
+    <div class="stat-card reveal-scale"><div class="stat-num">iOS • MacOS<span class="stat-unit"></span></div><div class="stat-label">Multi-Platform Expert</div></div>
   </div>
 </section>
 
@@ -498,14 +498,14 @@ var appData = {
     ssBase: B + '/pdfeditor', 
     ssMax: 9,
     type: 'ios', 
-    name: 'PDF Editor: Master Suite', 
+    name: 'PDF Editor: Sign PDF', 
     subtitle: 'Productivity & Documents',
     desc: 'A powerful, native document engine built entirely with SwiftUI and PDFKit. This "No-Third-Party" solution features advanced annotation, AI-driven document insights, and a comprehensive suite of conversion tools.',
     storeUrl: 'https://apps.apple.com/in/app/pdf-editor-edit-sign-pdf/id1550574425',
-    tech: ['SwiftUI', 'PDFKit', 'VisionKit', 'Core Graphics', 'Swift Concurrency', 'Core ML'],
+    tech: ['SwiftUI', 'PDFKit', 'SwiftData', 'MVVM'],
     features: [
         'Native Engine: 100% in-house Swift code utilizing PDFKit and Core Graphics for high-performance rendering.',
-        'AI Assistant: Integrated LLM for real-time document summarization, analysis, and intelligent Q&A.',
+        'AI Assistant: Integrated AI APi for real-time document summarization, analysis, and intelligent Q&A.',
         'Professional Editing: Advanced annotation, digital signatures, page reordering, and PDF merging/splitting.',
         'Universal Converter: High-fidelity text, image, web, and Office (Word/PPT/Excel) to PDF conversion logic.',
         'Secure Scan: Native VisionKit integration for high-quality document scanning with OCR and PDF encryption.',
@@ -524,8 +524,8 @@ var appData = {
     name: 'CleanUp: AI Storage Optimizer', 
     subtitle: 'Utility & Performance',
     desc: 'An all-in-one system utility designed to reclaim storage. It utilizes intelligent algorithms to detect duplicates, compress heavy media, and secure private data in an encrypted vault.',
-    storeUrl: 'YOUR_STORE_URL_HERE',
-    tech: ['SwiftUI', 'Photos Framework', 'AVFoundation', 'FileManager', 'Local Authentication'],
+    storeUrl: 'https://apps.apple.com/in/app/cleanup-ai-phone-cleaner/id6444210913',
+    tech: ['SwiftUI', 'Photos Framework', 'AVFoundation', 'FileManager', 'Keychain'],
     features: [
         'Intelligent Scanning: Advanced logic to identify duplicate/similar photos and contacts.',
         'Media Compression: High-efficiency video and image compression to save space without data loss.',
@@ -543,7 +543,7 @@ var appData = {
     ssBase: B + '/purecheck', 
     ssMax: 8,
     type: 'ios', 
-    name: 'PureCheck: Smart Scanner', 
+    name: 'PureCheck: Scan food,Cosmetic', 
     subtitle: 'Health & Fitness',
     desc: 'A sophisticated health-tech solution built with a hybrid UIKit/SwiftUI architecture. Leverages Computer Vision for real-time nutritional analysis and features an AI-driven assistant for personalized dietary guidance.',
     storeUrl: 'https://apps.apple.com/in/app/purecheck-scan-food-cosmetic/id1662348653',
@@ -551,7 +551,7 @@ var appData = {
     features: [
         'Advanced Computer Vision: Real-time barcode processing and OCR for ingredient extraction.',
         'Intelligent Scoring: Integrated OpenFoodFacts API to calculate Nutri-Score, NOVA, and allergen data.',
-        'AI Dietary Assistant: LLM-powered chat interface providing personalized nutritional insights.',
+        'AI Dietary Assistant: AI chat interface providing personalized nutritional insights.',
         'Social Community: A full-stack social module enabling users to share experiences and suggestions.',
         'Hybrid Architecture: Expertly migrated core modules from UIKit to SwiftUI for a modern, reactive UI.',
         'Complex Data Parsing: Custom logic to identify Veg/Non-Veg status and hidden additives.'
@@ -620,7 +620,7 @@ var projectData = {
     subtitle: 'macOS Productivity Suite',
     tagline: 'A specialized macOS productivity suite for instant browser navigation using system-wide global hotkeys.',
     desc: 'A high-efficiency macOS utility designed to eliminate workflow friction. Features a database of 5,000+ optimized shortcuts with system-wide global hotkey support for instant browser-based navigation.',
-    tech: ['macOS', 'SwiftUI', 'Carbon Framework', 'AppKit', 'MVVM'],
+    tech: ['macOS', 'SwiftUI', 'AppKit', 'MVVM'],
     features: [
         'Global Hotkeys: Low-level implementation using Carbon to trigger actions from any active application.',
         'Massive Shortcut Library: Pre-indexed database of 5,000+ production, social, and developer URLs.',
@@ -643,9 +643,8 @@ var projectData = {
     subtitle: 'macOS System Utility',
     tagline: 'High-performance macOS system utility for multi-threaded junk removal and developer cache optimization.',
     desc: 'A high-performance system maintenance tool built for macOS. It features a concurrent scanning engine that targets deep system junk, developer-specific bloat, and oversized "ghost" files to reclaim workstation performance.',
-    tech: ['macOS', 'SwiftUI', 'FileManager', 'GCD', 'AppKit'],
+    tech: ['macOS', 'SwiftUI', 'FileManager', 'AppKit'],
     features: [
-        'Advanced Scanning Engine: Utilizes Grand Central Dispatch (GCD) for high-speed, multi-threaded file system traversal.',
         'Developer-First Cleanup: Specialized modules for purging Xcode Derived Data, iOS Device Support, and Android Studio caches.',
         'Intelligent File Analysis: Identifies and categorizes oversized and dormant files for rapid storage optimization.',
         'App Uninstaller Suite: Deep-links to application containers to remove leftover library files and hidden caches.',
