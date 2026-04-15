@@ -418,8 +418,8 @@ function renderHero(){
 }
 
 function buildCard(id,item,isApp){
-  var ss0=item.screenshots&&item.screenshots[0]?item.screenshots[0]:'';
-  var ss1=item.screenshots&&item.screenshots[1]?item.screenshots[1]:'';
+  var ss1=item.screenshots&&item.screenshots[0]?item.screenshots[0]:'';
+  var ss2=item.screenshots&&item.screenshots[1]?item.screenshots[1]:'';
   var action=isApp
     ?'<a href="'+item.storeUrl+'" target="_blank" class="app-store-btn" onclick="event.stopPropagation()">&#x2197; Store</a>'
     :(item.badge==='wip'?'<span class="badge-wip">In Progress</span>':'<span class="badge-macos">macOS</span>');
@@ -427,10 +427,10 @@ function buildCard(id,item,isApp){
     ?'<img src="'+item.iconUrl+'" loading="lazy" alt="'+item.name+'" onerror="this.parentElement.style.background=\''+item.iconBg+'\';this.outerHTML=\'<span style=font-size:20px>'+item.emoji+'</span>\'">'
     :'<span style="font-size:20px">'+item.emoji+'</span>';
   var peekHtml='';
-  if(ss0||ss1){
+  if(ss1||ss2){
     peekHtml='<div class="banner-ss-peek">'
-      +(ss0?'<img class="peek-img" src="'+ss0+'" alt="" loading="lazy" onerror="this.style.display=\'none\'">':'')
       +(ss1?'<img class="peek-img" src="'+ss1+'" alt="" loading="lazy" onerror="this.style.display=\'none\'">':'')
+      +(ss2?'<img class="peek-img" src="'+ss2+'" alt="" loading="lazy" onerror="this.style.display=\'none\'">':'')
       +'</div>';
   }
   var tagline=isApp?item.desc.split('.')[0]+'.':item.tagline;
