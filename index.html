@@ -476,54 +476,96 @@ function ssUrls(base, maxCount, ext) {
 }
 
 var appData = {
+   pdfeditor: {
+    emoji: '📄', 
+    iconColor: '#e74c3c',
+    iconBg: 'linear-gradient(135deg, #e74c3c, #c0392b)',
+    bannerTint: 'rgba(231, 76, 60, 1)',
+    iconUrl: B + '/pdfeditor/icon.png',
+    ssBase: B + '/pdfeditor', 
+    ssMax: 9,
+    type: 'ios', 
+    name: 'PDF Editor: Master Suite', 
+    subtitle: 'Productivity & Documents',
+    desc: 'A powerful, native document engine built entirely with SwiftUI and PDFKit. This "No-Third-Party" solution features advanced annotation, AI-driven document insights, and a comprehensive suite of conversion tools.',
+    storeUrl: 'https://apps.apple.com/in/app/pdf-editor-edit-sign-pdf/id1550574425',
+    tech: ['SwiftUI', 'PDFKit', 'VisionKit', 'Core Graphics', 'Swift Concurrency', 'Core ML'],
+    features: [
+        'Native Engine: 100% in-house Swift code utilizing PDFKit and Core Graphics for high-performance rendering.',
+        'AI Assistant: Integrated LLM for real-time document summarization, analysis, and intelligent Q&A.',
+        'Professional Editing: Advanced annotation, digital signatures, page reordering, and PDF merging/splitting.',
+        'Universal Converter: High-fidelity text, image, web, and Office (Word/PPT/Excel) to PDF conversion logic.',
+        'Secure Scan: Native VisionKit integration for high-quality document scanning with OCR and PDF encryption.',
+        'Zero-Dependency Architecture: Built without third-party libraries to ensure maximum security and efficiency.'
+    ]
+},
   affirmation: {
-    emoji:'🌸', iconColor:'#ff6b9d',
-    iconBg:'linear-gradient(135deg,#ff6b9d,#ee5a24)',
-    bannerTint:'rgba(255,107,157,1)',
-    iconUrl: B+'/affirmation/icon.png',
-    ssBase: B+'/affirmation', ssMax:10,
-    type:'ios', name:'Affirmation \u2013 Daily Mindset', subtitle:'Wellness & Mindfulness',
-    desc:'A high-engagement wellness app built in SwiftUI. Smart notifications, custom WidgetKit widgets, and localized content for multiple languages.',
-    storeUrl:'https://apps.apple.com/in/app/daily-affirmations-love-life/id1615959853',
-    tech:['SwiftUI','WidgetKit','Push Notifications','Localization','MVVM'],
-    features:['Daily affirmation delivery with smart scheduling','WidgetKit home-screen widgets in multiple sizes','Multi-language localized content','Smooth SwiftUI animations','Full App Store lifecycle owned end-to-end']
-  },
+    emoji: '🌸', 
+    iconColor: '#ff6b9d',
+    iconBg: 'linear-gradient(135deg, #ff6b9d, #ee5a24)',
+    bannerTint: 'rgba(255, 107, 157, 1)',
+    iconUrl: B + '/affirmation/icon.png',
+    ssBase: B + '/affirmation', 
+    ssMax: 10,
+    type: 'ios', 
+    name: 'Daily Affirmations: Mindset', 
+    subtitle: 'Health & Fitness',
+    desc: 'A premium wellness platform built with a hybrid UIKit and SwiftUI architecture. Engineered for high user retention with a custom notification engine and localized content support.',
+    storeUrl: 'https://apps.apple.com/in/app/daily-affirmations-love-life/id1615959853',
+    tech: ['SwiftUI', 'UIKit', 'WidgetKit', 'UserNotifications', 'MVVM', 'Localization'],
+    features: [
+        'Hybrid Architecture: Seamlessly integrated SwiftUI with UIKit lifecycle',
+        'Smart Scheduling: Custom local notification engine for quote delivery',
+        'Advanced WidgetKit: Multiple home-screen widgets for instant motivation',
+        'Localized Experience: Full multi-language support for global reach',
+        'Product Ownership: Managed end-to-end from architecture to App Store'
+    ]
+},
   cleanup: {
-    emoji:'🧹', iconColor:'#4a90d9',
-    iconBg:'linear-gradient(135deg,#4a90d9,#007aff)',
-    bannerTint:'rgba(74,144,217,1)',
-    iconUrl: B+'/cleanup/icon.png',
-    ssBase: B+'/cleanup', ssMax:8,
-    type:'ios', name:'CleanUp \u2013 AI Storage Optimizer', subtitle:'Utility & Performance',
-    desc:'High-performance iPhone utility to reclaim storage using AI-powered duplicate and junk detection. Owned the full product lifecycle solo.',
-    storeUrl:'https://apps.apple.com/in/app/cleanup-ai-clean-storage-space/id6444210913',
-    tech:['SwiftUI','FileManager','AI/ML','GCD','App Store Connect'],
-    features:['AI-powered detection of duplicates and junk files','High-performance concurrent scanning','One-tap cleanup with storage breakdown','Privacy-first — all processing on-device']
-  },
+    emoji: '🧹', 
+    iconColor: '#3498db',
+    iconBg: 'linear-gradient(135deg, #3498db, #2980b9)',
+    bannerTint: 'rgba(52, 152, 219, 1)',
+    iconUrl: B + '/cleanup/icon.png',
+    ssBase: B + '/cleanup', 
+    ssMax: 8,
+    type: 'ios', 
+    name: 'CleanUp: AI Storage Optimizer', 
+    subtitle: 'Utility & Performance',
+    desc: 'An all-in-one system utility designed to reclaim storage. It utilizes intelligent algorithms to detect duplicates, compress heavy media, and secure private data in an encrypted vault.',
+    storeUrl: 'YOUR_STORE_URL_HERE',
+    tech: ['SwiftUI', 'Photos Framework', 'AVFoundation', 'FileManager', 'Local Authentication'],
+    features: [
+        'Intelligent Scanning: Advanced logic to identify duplicate/similar photos and contacts.',
+        'Media Compression: High-efficiency video and image compression to save space without data loss.',
+        'Storage Management: Deep-scan file system to locate and remove oversized "ghost" files.',
+        'App Vault: Secure, biometric-protected storage for private photos and sensitive documents.',
+        'Performance Focused: Optimized for multi-threaded background processing to handle large libraries.'
+    ]
+},
   purecheck: {
-    emoji:'🌿', iconColor:'#27ae60',
-    iconBg:'linear-gradient(135deg,#27ae60,#2ecc71)',
-    bannerTint:'rgba(39,174,96,1)',
-    iconUrl: B+'/purecheck/icon.png',
-    ssBase: B+'/purecheck', ssMax:8,
-    type:'ios', name:'PureCheck \u2013 Food & Cosmetic Scanner', subtitle:'Health & Scanner',
-    desc:'Native iOS scanner using Vision Framework and AVFoundation for real-time barcode detection and OCR on nutritional labels. Third-party API for ingredient safety.',
-    storeUrl:'https://apps.apple.com/in/app/purecheck-scan-food-cosmetic/id1662348653',
-    tech:['Vision Framework','AVFoundation','SwiftUI','REST APIs','OCR'],
-    features:['Real-time barcode scanning via Vision Framework','OCR pipeline for nutritional labels','Product safety score API integration','Full App Store compliance']
-  },
-  pdfeditor: {
-    emoji:'📄', iconColor:'#e74c3c',
-    iconBg:'linear-gradient(135deg,#e74c3c,#c0392b)',
-    bannerTint:'rgba(231,76,60,1)',
-    iconUrl: B+'/pdfeditor/icon.png',
-    ssBase: B+'/pdfeditor', ssMax:9,
-    type:'ios', name:'PDF Editor \u2013 Document Manager', subtitle:'Productivity & Documents',
-    desc:'Full-featured PDF editor built with PDFKit and SwiftUI. Annotation, page reordering, merge/split, digital signatures, and export — clean MVVM architecture.',
-    storeUrl:'https://apps.apple.com/in/app/pdf-editor-edit-sign-pdf/id1550574425',
-    tech:['PDFKit','SwiftUI','MVVM','FileManager','App Store Connect'],
-    features:['Annotation — highlight, draw, text','Drag-and-drop page reordering','Merge and split PDFs','Digital signature with touch drawing']
-  }
+    emoji: '🌿', 
+    iconColor: '#27ae60',
+    iconBg: 'linear-gradient(135deg, #27ae60, #2ecc71)',
+    bannerTint: 'rgba(39, 174, 96, 1)',
+    iconUrl: B + '/purecheck/icon.png',
+    ssBase: B + '/purecheck', 
+    ssMax: 8,
+    type: 'ios', 
+    name: 'PureCheck: Smart Scanner', 
+    subtitle: 'Health & Fitness',
+    desc: 'A sophisticated health-tech solution built with a hybrid UIKit/SwiftUI architecture. Leverages Computer Vision for real-time nutritional analysis and features an AI-driven assistant for personalized dietary guidance.',
+    storeUrl: 'https://apps.apple.com/in/app/purecheck-scan-food-cosmetic/id1662348653',
+    tech: ['UIKit', 'SwiftUI', 'Vision Framework', 'AVFoundation', 'Combine', 'REST APIs'],
+    features: [
+        'Advanced Computer Vision: Real-time barcode processing and OCR for ingredient extraction.',
+        'Intelligent Scoring: Integrated OpenFoodFacts API to calculate Nutri-Score, NOVA, and allergen data.',
+        'AI Dietary Assistant: LLM-powered chat interface providing personalized nutritional insights.',
+        'Social Community: A full-stack social module enabling users to share experiences and suggestions.',
+        'Hybrid Architecture: Expertly migrated core modules from UIKit to SwiftUI for a modern, reactive UI.',
+        'Complex Data Parsing: Custom logic to identify Veg/Non-Veg status and hidden additives.'
+    ]
+}
 };
 
 var projectData = {
