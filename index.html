@@ -37,7 +37,7 @@
     .section-title{font-size:clamp(34px,5vw,56px);font-weight:800;letter-spacing:-2px;line-height:1.05;color:var(--text-primary);margin-bottom:16px}
     .section-sub{font-size:18px;color:var(--text-secondary);font-weight:300;max-width:540px;line-height:1.6}
 
-    /* ── HERO ── */
+    /* HERO */
     #hero{min-height:calc(100vh - 56px);display:flex;align-items:center;padding:100px 28px;max-width:1040px;margin:0 auto;position:relative}
     .hero-content{flex:1;position:relative;z-index:2}
     .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:7px 16px 7px 10px;font-size:13px;font-weight:500;color:var(--text-secondary);margin-bottom:36px;box-shadow:var(--shadow-sm);animation:slideDown .8s ease both}
@@ -58,7 +58,7 @@
     .btn-secondary{background:var(--surface);color:var(--text-primary);border:1px solid var(--border);box-shadow:var(--shadow-sm)}
     .btn-secondary:hover{transform:translateY(-2px);border-color:var(--border-hover);box-shadow:var(--shadow-md)}
 
-    /* ── PHONE ── */
+    /* PHONE */
     .hero-visual{flex:0 0 320px;display:flex;align-items:center;justify-content:center;animation:revealUp 1s ease .6s both}
     .hero-visual-wrapper{position:relative;width:220px}
     .phone-wrap{position:relative;width:220px;aspect-ratio:393/852;transition:transform .5s cubic-bezier(.4,0,.2,1);filter:drop-shadow(0 40px 60px rgba(0,0,0,.22))}
@@ -88,7 +88,7 @@
     .hero-blob-2{width:300px;height:300px;background:var(--purple);bottom:-50px;left:-100px;opacity:.05;animation:blobFloat 10s ease-in-out infinite reverse}
     @keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(20px,-20px) scale(1.05)}66%{transform:translate(-15px,15px) scale(.95)}}
 
-    /* ── STATS ── */
+    /* STATS */
     .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
     .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;box-shadow:var(--shadow-sm);transition:all .35s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
     .stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#5ac8fa);transform:scaleX(0);transform-origin:left;transition:transform .5s ease}
@@ -99,9 +99,7 @@
     .stat-label{font-size:14px;color:var(--text-secondary);margin-top:10px}
 
     /* ═══════════════════════════════════════
-       CARDS — Apple-style clean banner
-       No gradient. Light grey bg, icon centred,
-       screenshot peeks slide in from bottom.
+       CARDS — FIXED: icon bottom-left, screenshots bottom-right
        ═══════════════════════════════════════ */
     .apps-grid,.projects-grid-new{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-top:48px}
     .app-card,.project-card-new{
@@ -112,41 +110,46 @@
     .app-card:hover,.project-card-new:hover{transform:translateY(-8px) scale(1.01);box-shadow:var(--shadow-xl);border-color:var(--border-hover)}
     .app-card:hover .expand-hint,.project-card-new:hover .expand-hint{opacity:1;transform:translateY(0)}
 
-    /* ── Banner: clean Apple product card style ── */
+    /* Banner */
     .card-banner{
       height:168px;position:relative;overflow:hidden;flex-shrink:0;
-      /* Neutral light bg — icon color is the only accent */
       background:#f5f5f7;
     }
-    /* Subtle tinted radial glow from icon color, very faint */
+    /* Subtle radial tint from icon colour — very light */
     .card-banner-tint{
       position:absolute;inset:0;z-index:0;
-      opacity:0.13;
+      opacity:0.12;
       transition:opacity .4s;
     }
-    .app-card:hover .card-banner-tint,.project-card-new:hover .card-banner-tint{opacity:0.2}
-    /* Large centred icon */
+    .app-card:hover .card-banner-tint,.project-card-new:hover .card-banner-tint{opacity:0.20}
+
+    /* ── ICON: bottom-left, NO overlap with screenshots ── */
     .banner-icon{
-      position:absolute;top:50%;left:50%;
-      transform:translate(-50%,-54%);/* slightly above centre, screenshots fill bottom */
-      z-index:2;
-      width:72px;height:72px;border-radius:18px;overflow:hidden;
-      box-shadow:0 8px 28px rgba(0,0,0,0.14),0 0 0 1px rgba(0,0,0,0.06);
+      position:absolute;
+      bottom:14px;
+      left:16px;
+      z-index:4;
+      width:60px;height:60px;border-radius:16px;
+      overflow:hidden;
+      box-shadow:0 6px 20px rgba(0,0,0,0.16),0 0 0 1px rgba(0,0,0,0.06);
       display:flex;align-items:center;justify-content:center;
       background:#e8e8e8;
-      transition:transform .4s cubic-bezier(.34,1.2,.64,1);
+      transition:transform .35s cubic-bezier(.34,1.1,.64,1);
     }
     .banner-icon img{width:100%;height:100%;object-fit:cover;display:block}
+    /* Hover: lift the icon slightly */
     .app-card:hover .banner-icon,.project-card-new:hover .banner-icon{
-      transform:translate(-50%,-54%) scale(1.08);
+      transform:scale(1.08) translateY(-3px);
     }
-    /* Fade bottom so screenshots blend into card body */
+
+    /* Bottom fade blends both icon and screenshots into white body */
     .card-banner-fade{
-      position:absolute;bottom:0;left:0;right:0;height:56px;
+      position:absolute;bottom:0;left:0;right:0;height:52px;
       background:linear-gradient(to top,#ffffff,transparent);
       z-index:3;
     }
-    /* Screenshot peek — two portrait frames rising from bottom */
+
+    /* ── Screenshots: bottom-RIGHT — won't touch icon ── */
     .banner-ss-peek{
       position:absolute;bottom:0;right:14px;
       display:flex;gap:6px;align-items:flex-end;
@@ -156,32 +159,27 @@
       width:54px;height:98px;
       border-radius:10px 10px 0 0;
       object-fit:cover;object-position:top;
-      border:1.5px solid rgba(0,0,0,0.06);border-bottom:none;
+      border:1.5px solid rgba(0,0,0,0.07);border-bottom:none;
       background:#e8e8e8;
-      /* hidden by default, slides up on .in-view */
       transform:translateY(100%);
       transition:transform .6s cubic-bezier(.34,1.1,.64,1);
-      /* hide broken images cleanly */
       min-height:0;
     }
     .peek-img.loaded{background:transparent}
     .peek-img:nth-child(1){transition-delay:.05s}
     .peek-img:nth-child(2){height:80px;transition-delay:.18s}
     .app-card.in-view .peek-img,.project-card-new.in-view .peek-img{transform:translateY(0)}
-    /* macOS projects: wider landscape peek */
-    .peek-img.peek-mac{
-      width:90px;height:60px;
-      border-radius:8px 8px 0 0;
-    }
-    .peek-img.peek-mac:nth-child(2){height:48px}
+    /* macOS: wider landscape */
+    .peek-img.peek-mac{width:88px;height:58px;border-radius:8px 8px 0 0}
+    .peek-img.peek-mac:nth-child(2){height:46px}
 
-    /* ── Card body ── */
+    /* ── Card body: title row + tagline + tags ── */
     .card-body{padding:14px 18px 18px;display:flex;flex-direction:column;flex:1}
-    .card-body-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+    .card-body-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
     .card-title-group{flex:1;min-width:0}
     .app-name{font-size:15px;font-weight:700;letter-spacing:-.3px;margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .app-subtitle-small{font-size:11px;color:var(--text-tertiary);font-weight:500}
-    .card-action-inline{flex-shrink:0}
+    .card-action-inline{flex-shrink:0;padding-top:1px}
     .app-tagline{font-size:12.5px;color:var(--text-secondary);margin-bottom:11px;line-height:1.55;flex:1}
     .app-tags{display:flex;flex-wrap:wrap;gap:5px}
     .tag{font-size:11px;font-weight:500;background:var(--accent-soft);border:1px solid var(--accent-mid);border-radius:100px;padding:3px 10px;color:var(--accent);font-family:'JetBrains Mono',monospace;transition:all .2s}
@@ -192,7 +190,7 @@
     .badge-macos{font-size:11px;background:var(--bg);color:var(--text-secondary);padding:5px 11px;border-radius:100px;font-weight:700;border:1px solid var(--border)}
     .expand-hint{font-size:11px;color:var(--text-tertiary);text-align:center;padding:0 22px 12px;font-weight:500;opacity:0;transform:translateY(4px);transition:all .3s ease}
 
-    /* ── MODAL ── */
+    /* MODAL */
     .modal-overlay{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.55);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .4s cubic-bezier(.4,0,.2,1);padding:24px}
     .modal-overlay.active{opacity:1;visibility:visible}
     .modal{background:var(--surface);border-radius:var(--radius-xl);max-width:700px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow-xl);transform:translateY(40px) scale(.95);transition:transform .4s cubic-bezier(.4,0,.2,1);border:1px solid var(--border);scrollbar-width:none;-ms-overflow-style:none}
@@ -214,7 +212,6 @@
     .modal-app-subtitle{font-size:13px;color:var(--text-secondary);margin-top:2px}
     .modal-desc{font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border)}
     .modal-sec-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:12px}
-    /* iOS screenshots: width-fixed, height auto → full portrait */
     .modal-ss-wrap{display:flex;gap:10px;overflow-x:auto;margin-bottom:24px;padding-bottom:6px;scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;align-items:flex-start}
     .modal-ss-wrap::-webkit-scrollbar{display:none}
     .modal-ss-img.ss-ios{flex-shrink:0;width:160px;height:auto;border-radius:18px;display:block;border:1px solid rgba(0,0,0,.07);background:#f0f0f0;box-shadow:0 4px 18px rgba(0,0,0,.1);object-fit:contain}
@@ -225,7 +222,7 @@
     .modal-btn-store{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:100px;background:linear-gradient(135deg,var(--text-primary),#2c2c2e);color:#fff;font-size:14px;font-weight:700;text-decoration:none;transition:all .3s;font-family:inherit}
     .modal-btn-store:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.25)}
 
-    /* ── SKILLS ── */
+    /* SKILLS */
     .skills-container{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:48px}
     .skill-group{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:28px;box-shadow:var(--shadow-sm);transition:all .35s cubic-bezier(.4,0,.2,1)}
     .skill-group:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--border-hover)}
@@ -238,7 +235,7 @@
     .skill-bar{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--accent),#5ac8fa);transform:scaleX(0);transform-origin:left;transition:transform 1s cubic-bezier(.4,0,.2,1)}
     .skill-bar.animate{transform:scaleX(1)}
 
-    /* ── CONTACT ── */
+    /* CONTACT */
     #contact{text-align:center}
     #contact .section-label::before{display:none}
     #contact .section-sub{margin:0 auto 44px}
@@ -264,6 +261,7 @@
       .modal{max-height:92vh}
       .modal-header{height:180px}
       .card-banner{height:148px}
+      .banner-icon{width:48px;height:48px;border-radius:13px;bottom:12px;left:12px}
       .peek-img{width:44px;height:80px}
       .peek-img:nth-child(2){height:66px}
       .modal-ss-img.ss-ios{width:130px}
@@ -338,7 +336,7 @@
   <div class="stats-grid stagger">
     <div class="stat-card reveal-scale"><div class="stat-num">5<span class="stat-unit">+</span></div><div class="stat-label">Production Apps Shipped</div></div>
     <div class="stat-card reveal-scale"><div class="stat-num">3.5<span class="stat-unit">yr</span></div><div class="stat-label">Native Apple Development</div></div>
-    <div class="stat-card reveal-scale"><div class="stat-num">iOS • MacOS<span class="stat-unit"></span></div><div class="stat-label">Multi-Platform Expert</div></div>
+    <div class="stat-card reveal-scale"><div class="stat-num">iOS &bull; macOS<span class="stat-unit"></span></div><div class="stat-label">Multi-Platform Expert</div></div>
   </div>
 </section>
 
@@ -353,13 +351,10 @@
 
 <section class="section" id="projects">
   <div class="reveal">
-  <p class="section-label" style="text-transform: uppercase; letter-spacing: 0.1em;">Advanced R&D &amp; Utilities</p>
-  <h2 class="section-title">Platform Ecosystem</h2>
-  <p class="section-sub">
-    A collection of specialized macOS system utilities and experimental AI-driven applications 
-    leveraging the latest Apple frameworks and low-level system APIs.
-  </p>
-</div>
+    <p class="section-label" style="text-transform:uppercase;letter-spacing:0.1em;">Advanced R&amp;D &amp; Utilities</p>
+    <h2 class="section-title">Platform Ecosystem</h2>
+    <p class="section-sub">A collection of specialized macOS system utilities and experimental AI-driven applications leveraging the latest Apple frameworks and low-level system APIs.</p>
+  </div>
   <div class="projects-grid-new stagger" id="projectsGrid"></div>
 </section>
 
@@ -367,12 +362,8 @@
   <div class="reveal">
     <p class="section-label">Tech Stack</p>
     <h2 class="section-title">Technical Expertise</h2>
-    <p class="section-sub">
-      Comprehensive mastery of the Apple ecosystem, specializing in reactive architectures, 
-      multi-platform development, and AI-integrated solutions.
-    </p>
+    <p class="section-sub">Comprehensive mastery of the Apple ecosystem, specializing in reactive architectures, multi-platform development, and AI-integrated solutions.</p>
   </div>
-
   <div class="skills-container stagger">
     <div class="skill-group reveal-scale">
       <div class="skill-group-title">Frameworks &amp; UI</div>
@@ -381,7 +372,6 @@
       <div class="skill-item"><span class="skill-name">Combine Framework</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="80%"></div></div></div>
       <div class="skill-item"><span class="skill-name">WidgetKit &amp; Live Activities</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="75%"></div></div></div>
     </div>
-
     <div class="skill-group reveal-scale">
       <div class="skill-group-title">Architecture &amp; Performance</div>
       <div class="skill-item"><span class="skill-name">SwiftData &amp; CoreData</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="90%"></div></div></div>
@@ -389,7 +379,6 @@
       <div class="skill-item"><span class="skill-name">Swift Concurrency (Async/Await)</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="85%"></div></div></div>
       <div class="skill-item"><span class="skill-name">Memory Management</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="80%"></div></div></div>
     </div>
-
     <div class="skill-group reveal-scale">
       <div class="skill-group-title">Intelligence &amp; Cloud</div>
       <div class="skill-item"><span class="skill-name">Generative AI APIs</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="85%"></div></div></div>
@@ -397,7 +386,6 @@
       <div class="skill-item"><span class="skill-name">REST APIs</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="90%"></div></div></div>
       <div class="skill-item"><span class="skill-name">Third-party SDK Integration</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="80%"></div></div></div>
     </div>
-
     <div class="skill-group reveal-scale">
       <div class="skill-group-title">Platforms &amp; Ecosystem</div>
       <div class="skill-item"><span class="skill-name">iOS &amp; macOS Development</span><div class="skill-bar-wrap"><div class="skill-bar" data-width="95%"></div></div></div>
@@ -410,13 +398,10 @@
 
 <section class="section" id="contact">
   <div class="reveal">
-  <p class="section-label">Let's Talk</p>
-  <h2 class="section-title">Get in Touch</h2>
-  <p class="section-sub">
-    Open to full-time opportunities, freelance projects, and high-impact collaborations. 
-    <br>Based in Ahmedabad — <b>Open to Remote roles or Relocation across India.</b>
-  </p>
-</div>
+    <p class="section-label">Let's Talk</p>
+    <h2 class="section-title">Get in Touch</h2>
+    <p class="section-sub">Open to full-time opportunities, freelance projects, and high-impact collaborations.<br>Based in Ahmedabad &mdash; <b>Open to Remote roles or Relocation across India.</b></p>
+  </div>
   <div class="contact-links reveal" style="transition-delay:.15s">
     <a href="mailto:tosifseta4@gmail.com" class="contact-link">&#x2709;&#xFE0F; tosifseta4@gmail.com</a>
     <a href="tel:+917878556614" class="contact-link">&#128222; +91 78785 56614</a>
@@ -458,223 +443,115 @@
 <script>
 var B = 'https://tosifseta.github.io/assets';
 
-/* ─────────────────────────────────────────
-   IMAGE LOADER — tries .PNG first then .png
-   Marks img.loaded so CSS shows it cleanly.
-   ───────────────────────────────────────── */
 function loadImg(img, url) {
-  // Try uppercase first (as uploaded from iPhone/Mac)
   var urlUpper = url.replace(/\.(png|PNG)$/i, '.PNG');
   var urlLower = url.replace(/\.(png|PNG)$/i, '.png');
   img.onerror = function() {
     if (img.src.indexOf('.PNG') !== -1) {
-      // uppercase failed → try lowercase
       img.onerror = function() { img.style.display = 'none'; };
       img.src = urlLower;
-    } else {
-      img.style.display = 'none';
-    }
+    } else { img.style.display = 'none'; }
   };
   img.onload = function() { img.classList.add('loaded'); };
   img.src = urlUpper;
 }
 
-/* Build screenshot URL list up to maxCount, stopping at first 404 */
-function ssUrls(base, maxCount, ext) {
-  var arr = [];
-  for (var i = 1; i <= maxCount; i++) {
-    arr.push(base + '/ss' + i + (ext || '.PNG'));
-  }
-  return arr;
-}
-
 var appData = {
-   pdfeditor: {
-    emoji: '📄', 
-    iconColor: '#e74c3c',
-    iconBg: 'linear-gradient(135deg, #e74c3c, #c0392b)',
-    bannerTint: 'rgba(231, 76, 60, 1)',
-    iconUrl: B + '/pdfeditor/icon.png',
-    ssBase: B + '/pdfeditor', 
-    ssMax: 9,
-    type: 'ios', 
-    name: 'PDF Editor: Edit & Sign PDF', 
-    subtitle: 'Productivity & Documents',
-    desc: 'A powerful, native document engine built entirely with SwiftUI and PDFKit. This "No-Third-Party" solution features advanced annotation, AI-driven document insights, and a comprehensive suite of conversion tools.',
-    storeUrl: 'https://apps.apple.com/in/app/pdf-editor-edit-sign-pdf/id1550574425',
-    tech: ['SwiftUI', 'PDFKit', 'SwiftData', 'MVVM'],
-    features: [
-        'Native Engine: 100% in-house Swift code utilizing PDFKit and Core Graphics for high-performance rendering.',
-        'AI Assistant: Integrated AI APi for real-time document summarization, analysis, and intelligent Q&A.',
-        'Professional Editing: Advanced annotation, digital signatures, page reordering, and PDF merging/splitting.',
-        'Universal Converter: High-fidelity text, image, web, and Office (Word/PPT/Excel) to PDF conversion logic.',
-        'Secure Scan: Native VisionKit integration for high-quality document scanning with OCR and PDF encryption.',
-        'Zero-Dependency Architecture: Built without third-party libraries to ensure maximum security and efficiency.'
-    ]
-},
+  pdfeditor: {
+    emoji:'📄', iconColor:'#e74c3c', iconBg:'linear-gradient(135deg,#e74c3c,#c0392b)',
+    bannerTint:'rgba(231,76,60,1)', iconUrl:B+'/pdfeditor/icon.png',
+    ssBase:B+'/pdfeditor', ssMax:9, type:'ios',
+    name:'PDF Editor: Edit & Sign PDF', subtitle:'Productivity & Documents',
+    desc:'A powerful, native document engine built entirely with SwiftUI and PDFKit. This "No-Third-Party" solution features advanced annotation, AI-driven document insights, and a comprehensive suite of conversion tools.',
+    storeUrl:'https://apps.apple.com/in/app/pdf-editor-edit-sign-pdf/id1550574425',
+    tech:['SwiftUI','PDFKit','SwiftData','MVVM'],
+    features:['Native Engine: 100% in-house Swift code utilizing PDFKit and Core Graphics for high-performance rendering.','AI Assistant: Integrated AI API for real-time document summarization, analysis, and intelligent Q&A.','Professional Editing: Advanced annotation, digital signatures, page reordering, and PDF merging/splitting.','Universal Converter: High-fidelity text, image, web, and Office to PDF conversion logic.','Secure Scan: Native VisionKit integration for high-quality document scanning with OCR and PDF encryption.','Zero-Dependency Architecture: Built without third-party libraries to ensure maximum security and efficiency.']
+  },
   cleanup: {
-    emoji: '🧹', 
-    iconColor: '#3498db',
-    iconBg: 'linear-gradient(135deg, #3498db, #2980b9)',
-    bannerTint: 'rgba(52, 152, 219, 1)',
-    iconUrl: B + '/cleanup/icon.png',
-    ssBase: B + '/cleanup', 
-    ssMax: 8,
-    type: 'ios', 
-    name: 'CleanUp: AI Phone Cleaner', 
-    subtitle: 'Utility & Performance',
-    desc: 'An all-in-one system utility designed to reclaim storage. It utilizes intelligent algorithms to detect duplicates, compress heavy media, and secure private data in an encrypted vault.',
-    storeUrl: 'https://apps.apple.com/in/app/cleanup-ai-phone-cleaner/id6444210913',
-    tech: ['SwiftUI', 'Photos', 'AVFoundation', 'FileManager', 'Keychain'],
-    features: [
-        'Intelligent Scanning: Advanced logic to identify duplicate/similar photos and contacts.',
-        'Media Compression: High-efficiency video and image compression to save space without data loss.',
-        'Storage Management: Deep-scan file system to locate and remove oversized "ghost" files.',
-        'App Vault: Secure, biometric-protected storage for private photos and sensitive documents.',
-        'Performance Focused: Optimized for multi-threaded background processing to handle large libraries.'
-    ]
-},
+    emoji:'🧹', iconColor:'#3498db', iconBg:'linear-gradient(135deg,#3498db,#2980b9)',
+    bannerTint:'rgba(52,152,219,1)', iconUrl:B+'/cleanup/icon.png',
+    ssBase:B+'/cleanup', ssMax:8, type:'ios',
+    name:'CleanUp: AI Phone Cleaner', subtitle:'Utility & Performance',
+    desc:'An all-in-one system utility designed to reclaim storage. It utilizes intelligent algorithms to detect duplicates, compress heavy media, and secure private data in an encrypted vault.',
+    storeUrl:'https://apps.apple.com/in/app/cleanup-ai-phone-cleaner/id6444210913',
+    tech:['SwiftUI','Photos','AVFoundation','FileManager','Keychain'],
+    features:['Intelligent Scanning: Advanced logic to identify duplicate/similar photos and contacts.','Media Compression: High-efficiency video and image compression to save space without data loss.','Storage Management: Deep-scan file system to locate and remove oversized "ghost" files.','App Vault: Secure, biometric-protected storage for private photos and sensitive documents.','Performance Focused: Optimized for multi-threaded background processing to handle large libraries.']
+  },
   purecheck: {
-    emoji: '🌿', 
-    iconColor: '#27ae60',
-    iconBg: 'linear-gradient(135deg, #27ae60, #2ecc71)',
-    bannerTint: 'rgba(39, 174, 96, 1)',
-    iconUrl: B + '/purecheck/icon.png',
-    ssBase: B + '/purecheck', 
-    ssMax: 8,
-    type: 'ios', 
-    name: 'PureCheck: Scan food,Cosmetic', 
-    subtitle: 'Health & Fitness',
-    desc: 'A sophisticated health-tech solution built with a hybrid UIKit/SwiftUI architecture. Leverages Computer Vision for real-time nutritional analysis and features an AI-driven assistant for personalized dietary guidance.',
-    storeUrl: 'https://apps.apple.com/in/app/purecheck-scan-food-cosmetic/id1662348653',
-    tech: ['UIKit', 'SwiftUI', 'AVFoundation', 'Combine', 'REST APIs'],
-    features: [
-        'Advanced Computer Vision: Real-time barcode processing and OCR for ingredient extraction.',
-        'Intelligent Scoring: Integrated OpenFoodFacts API to calculate Nutri-Score, NOVA, and allergen data.',
-        'AI Dietary Assistant: AI chat interface providing personalized nutritional insights.',
-        'Social Community: A full-stack social module enabling users to share experiences and suggestions.',
-        'Hybrid Architecture: Expertly migrated core modules from UIKit to SwiftUI for a modern, reactive UI.',
-        'Complex Data Parsing: Custom logic to identify Veg/Non-Veg status and hidden additives.'
-    ]
-},
-   affirmation: {
-    emoji: '🌸', 
-    iconColor: '#ff6b9d',
-    iconBg: 'linear-gradient(135deg, #ff6b9d, #ee5a24)',
-    bannerTint: 'rgba(255, 107, 157, 1)',
-    iconUrl: B + '/affirmation/icon.png',
-    ssBase: B + '/affirmation', 
-    ssMax: 10,
-    type: 'ios', 
-    name: 'Daily Affirmations: Mindset', 
-    subtitle: 'Health & Fitness',
-    desc: 'A premium wellness platform built with a hybrid UIKit and SwiftUI architecture. Engineered for high user retention with a custom notification engine and localized content support.',
-    storeUrl: 'https://apps.apple.com/in/app/daily-affirmations-love-life/id1615959853',
-    tech: ['SwiftUI', 'UIKit', 'WidgetKit', 'UserNotifications', 'MVVM', 'Localization'],
-    features: [
-        'Hybrid Architecture: Seamlessly integrated SwiftUI with UIKit lifecycle',
-        'Smart Scheduling: Custom local notification engine for quote delivery',
-        'Advanced WidgetKit: Multiple home-screen widgets for instant motivation',
-        'Localized Experience: Full multi-language support for global reach',
-        'Product Ownership: Managed end-to-end from architecture to App Store'
-    ]
-}
+    emoji:'🌿', iconColor:'#27ae60', iconBg:'linear-gradient(135deg,#27ae60,#2ecc71)',
+    bannerTint:'rgba(39,174,96,1)', iconUrl:B+'/purecheck/icon.png',
+    ssBase:B+'/purecheck', ssMax:8, type:'ios',
+    name:'PureCheck: Scan food, Cosmetic', subtitle:'Health & Fitness',
+    desc:'A sophisticated health-tech solution built with a hybrid UIKit/SwiftUI architecture. Leverages Computer Vision for real-time nutritional analysis and features an AI-driven assistant for personalized dietary guidance.',
+    storeUrl:'https://apps.apple.com/in/app/purecheck-scan-food-cosmetic/id1662348653',
+    tech:['UIKit','SwiftUI','AVFoundation','Combine','REST APIs'],
+    features:['Advanced Computer Vision: Real-time barcode processing and OCR for ingredient extraction.','Intelligent Scoring: Integrated OpenFoodFacts API to calculate Nutri-Score, NOVA, and allergen data.','AI Dietary Assistant: AI chat interface providing personalized nutritional insights.','Social Community: A full-stack social module enabling users to share experiences and suggestions.','Hybrid Architecture: Expertly migrated core modules from UIKit to SwiftUI for a modern, reactive UI.','Complex Data Parsing: Custom logic to identify Veg/Non-Veg status and hidden additives.']
+  },
+  affirmation: {
+    emoji:'🌸', iconColor:'#ff6b9d', iconBg:'linear-gradient(135deg,#ff6b9d,#ee5a24)',
+    bannerTint:'rgba(255,107,157,1)', iconUrl:B+'/affirmation/icon.png',
+    ssBase:B+'/affirmation', ssMax:10, type:'ios',
+    name:'Daily Affirmations: Mindset', subtitle:'Health & Fitness',
+    desc:'A premium wellness platform built with a hybrid UIKit and SwiftUI architecture. Engineered for high user retention with a custom notification engine and localized content support.',
+    storeUrl:'https://apps.apple.com/in/app/daily-affirmations-love-life/id1615959853',
+    tech:['SwiftUI','UIKit','WidgetKit','UserNotifications','MVVM','Localization'],
+    features:['Hybrid Architecture: Seamlessly integrated SwiftUI with UIKit lifecycle','Smart Scheduling: Custom local notification engine for quote delivery','Advanced WidgetKit: Multiple home-screen widgets for instant motivation','Localized Experience: Full multi-language support for global reach','Product Ownership: Managed end-to-end from architecture to App Store']
+  }
 };
 
 var projectData = {
   resumebuilder: {
-    emoji: '📝', 
-    iconColor: '#8e44ad',
-    iconBg: 'linear-gradient(135deg, #8e44ad, #9b59b6)',
-    bannerTint: 'rgba(142, 68, 173, 1)',
-    iconUrl: B + '/resumeit/icon.png',
-    ssBase: B + '/resumeit', 
-    ssMax: 6,
-    type: 'ios', 
-    badge: 'wip',
-    name: 'ResumeIt: AI Resume CV Maker', 
-    subtitle: 'iOS — In Progress (R&D Phase)',
-    tagline: 'AI-driven career tool that parses legacy resumes and generates ATS-optimized professional content with SwiftData.',
-    desc: 'A next-generation career tool built with SwiftUI and SwiftData. It utilizes advanced AI APIs to parse legacy documents, generate high-impact professional content, and design ATS-optimized resumes and cover letters.',
-    tech: ['SwiftUI', 'SwiftData', 'AI API Integration', 'PDFKit', 'JSON Parsing'],
-    features: [
-        'AI Data Extraction: Automatically parses old resumes to populate modern profiles using intelligent text analysis.',
-        'Content Optimization: Smart suggestions for professional summaries and experience descriptions via AI APIs.',
-        'SwiftData Architecture: Leveraging modern local persistence for seamless draft management and offline editing.',
-        'ATS-Ready Templates: Dynamic, drag-and-drop resume layouts designed to pass modern Applicant Tracking Systems.',
-        'Cover Letter Generator: Context-aware AI assistant that crafts personalized cover letters based on specific job roles.',
-        'PDF Export Engine: High-fidelity PDF rendering with custom layout support for professional printing.'
-    ]
-},
+    emoji:'📝', iconColor:'#8e44ad', iconBg:'linear-gradient(135deg,#8e44ad,#9b59b6)',
+    bannerTint:'rgba(142,68,173,1)', iconUrl:B+'/resumeit/icon.png',
+    ssBase:B+'/resumeit', ssMax:6, type:'ios', badge:'wip',
+    name:'ResumeIt: AI Resume CV Maker', subtitle:'iOS — In Progress (R&D Phase)',
+    tagline:'AI-driven career tool that parses legacy resumes and generates ATS-optimized professional content with SwiftData.',
+    desc:'A next-generation career tool built with SwiftUI and SwiftData. It utilizes advanced AI APIs to parse legacy documents, generate high-impact professional content, and design ATS-optimized resumes and cover letters.',
+    tech:['SwiftUI','SwiftData','AI API Integration','PDFKit','JSON Parsing'],
+    features:['AI Data Extraction: Automatically parses old resumes to populate modern profiles using intelligent text analysis.','Content Optimization: Smart suggestions for professional summaries and experience descriptions via AI APIs.','SwiftData Architecture: Leveraging modern local persistence for seamless draft management and offline editing.','ATS-Ready Templates: Dynamic, drag-and-drop resume layouts designed to pass modern Applicant Tracking Systems.','Cover Letter Generator: Context-aware AI assistant that crafts personalized cover letters based on specific job roles.','PDF Export Engine: High-fidelity PDF rendering with custom layout support for professional printing.']
+  },
   shortcut: {
-    emoji: '⚡', 
-    iconColor: '#f39c12',
-    iconBg: 'linear-gradient(135deg, #f39c12, #e67e22)',
-    bannerTint: 'rgba(243, 156, 18, 1)',
-    iconUrl: B + '/shortcut/icon.png',
-    ssBase: B + '/shortcut', 
-    ssMax: 4,
-    type: 'macos', 
-    badge: 'macos',
-    name: 'Shortcut Assistant', 
-    subtitle: 'macOS Productivity Suite',
-    tagline: 'A specialized macOS productivity suite for instant browser navigation using system-wide global hotkeys.',
-    desc: 'A high-efficiency macOS utility designed to eliminate workflow friction. Features a database of 5,000+ optimized shortcuts with system-wide global hotkey support for instant browser-based navigation.',
-    tech: ['macOS', 'SwiftUI', 'AppKit', 'MVVM'],
-    features: [
-        'Global Hotkeys: Low-level implementation using Carbon to trigger actions from any active application.',
-        'Massive Shortcut Library: Pre-indexed database of 5,000+ production, social, and developer URLs.',
-        'Zero-Latency Launch: Optimized for rapid browser invocation with custom user-defined key combos.',
-        'Native macOS UX: Clean, modern settings panel built entirely with SwiftUI for the desktop environment.',
-        'Robust Architecture: Decoupled MVVM structure ensuring stability across different macOS versions.'
-    ]
-},
+    emoji:'⚡', iconColor:'#f39c12', iconBg:'linear-gradient(135deg,#f39c12,#e67e22)',
+    bannerTint:'rgba(243,156,18,1)', iconUrl:B+'/shortcut/icon.png',
+    ssBase:B+'/shortcut', ssMax:4, type:'macos', badge:'macos',
+    name:'Shortcut Assistant', subtitle:'macOS Productivity Suite',
+    tagline:'A specialized macOS productivity suite for instant browser navigation using system-wide global hotkeys.',
+    desc:'A high-efficiency macOS utility designed to eliminate workflow friction. Features a database of 5,000+ optimized shortcuts with system-wide global hotkey support for instant browser-based navigation.',
+    tech:['macOS','SwiftUI','AppKit','MVVM'],
+    features:['Global Hotkeys: Low-level implementation using Carbon to trigger actions from any active application.','Massive Shortcut Library: Pre-indexed database of 5,000+ production, social, and developer URLs.','Zero-Latency Launch: Optimized for rapid browser invocation with custom user-defined key combos.','Native macOS UX: Clean, modern settings panel built entirely with SwiftUI for the desktop environment.','Robust Architecture: Decoupled MVVM structure ensuring stability across different macOS versions.']
+  },
   maccleaner: {
-    emoji: '🖥', 
-    iconColor: '#1abc9c',
-    iconBg: 'linear-gradient(135deg, #1abc9c, #16a085)',
-    bannerTint: 'rgba(26, 188, 156, 1)',
-    iconUrl: B + '/maccleaner/icon.png',
-    ssBase: B + '/maccleaner', 
-    ssMax: 8,
-    type: 'macos', 
-    badge: 'macos',
-    name: 'MacCleaner: Pro Optimizer', 
-    subtitle: 'macOS System Utility',
-    tagline: 'High-performance macOS system utility for multi-threaded junk removal and developer cache optimization.',
-    desc: 'A high-performance system maintenance tool built for macOS. It features a concurrent scanning engine that targets deep system junk, developer-specific bloat, and oversized "ghost" files to reclaim workstation performance.',
-    tech: ['macOS', 'SwiftUI', 'FileManager', 'AppKit'],
-    features: [
-        'Developer-First Cleanup: Specialized modules for purging Xcode Derived Data, iOS Device Support, and Android Studio caches.',
-        'Intelligent File Analysis: Identifies and categorizes oversized and dormant files for rapid storage optimization.',
-        'App Uninstaller Suite: Deep-links to application containers to remove leftover library files and hidden caches.',
-        'Safe-Scan Protocols: Implements a "Preview-First" architecture to ensure critical system files remain protected.',
-        'Native macOS Experience: A pixel-perfect SwiftUI interface designed specifically for the macOS desktop aesthetic.'
-    ]
-}
+    emoji:'🖥', iconColor:'#1abc9c', iconBg:'linear-gradient(135deg,#1abc9c,#16a085)',
+    bannerTint:'rgba(26,188,156,1)', iconUrl:B+'/maccleaner/icon.png',
+    ssBase:B+'/maccleaner', ssMax:8, type:'macos', badge:'macos',
+    name:'MacCleaner: Pro Optimizer', subtitle:'macOS System Utility',
+    tagline:'High-performance macOS system utility for multi-threaded junk removal and developer cache optimization.',
+    desc:'A high-performance system maintenance tool built for macOS. It features a concurrent scanning engine that targets deep system junk, developer-specific bloat, and oversized files to reclaim workstation performance.',
+    tech:['macOS','SwiftUI','FileManager','AppKit'],
+    features:['Developer-First Cleanup: Specialized modules for purging Xcode Derived Data, iOS Device Support, and Android Studio caches.','Intelligent File Analysis: Identifies and categorizes oversized and dormant files for rapid storage optimization.','App Uninstaller Suite: Deep-links to application containers to remove leftover library files and hidden caches.','Safe-Scan Protocols: Implements a "Preview-First" architecture to ensure critical system files remain protected.','Native macOS Experience: A pixel-perfect SwiftUI interface designed specifically for the macOS desktop aesthetic.']
+  }
 };
 
-/* ── Hero phone icons ── */
+/* ── Hero ── */
 function renderHero() {
   var all = Object.values(appData).concat(Object.values(projectData));
-  var slots = all.slice(0, 7).concat([{emoji:'⚙️', iconBg:'linear-gradient(135deg,#636e72,#2d3436)', iconUrl:null}]);
+  var slots = all.slice(0,7).concat([{emoji:'⚙️',iconBg:'linear-gradient(135deg,#636e72,#2d3436)',iconUrl:null}]);
   document.getElementById('heroAppGrid').innerHTML = slots.map(function(s) {
-    if (s.iconUrl) {
-      return '<div class="phone-app"><img loading="lazy" onerror="this.parentElement.style.background=\''+s.iconBg+'\';this.parentElement.innerHTML=\'<span class=phone-app-emoji>'+s.emoji+'</span>\'" src="'+s.iconUrl+'"></div>';
-    }
+    if (s.iconUrl) return '<div class="phone-app"><img loading="lazy" onerror="this.parentElement.style.background=\''+s.iconBg+'\';this.parentElement.innerHTML=\'<span class=phone-app-emoji>'+s.emoji+'</span>\'" src="'+s.iconUrl+'"></div>';
     return '<div class="phone-app" style="background:'+s.iconBg+'"><span class="phone-app-emoji">'+s.emoji+'</span></div>';
   }).join('');
 }
 
-/* ── Build card HTML ── */
+/* ── Build card ── */
 function buildCard(id, item, isApp) {
   var isMac = item.type === 'macos';
-  // Icon HTML (small, in card body)
+
+  // Icon in banner (bottom-left)
   var iconHtml = item.iconUrl
     ? '<img data-src="'+item.iconUrl+'" data-fallback-bg="'+item.iconBg+'" data-fallback-emoji="'+item.emoji+'" class="lazy-icon" alt="">'
-    : '<span style="font-size:20px">'+item.emoji+'</span>';
+    : '<span style="font-size:22px">'+item.emoji+'</span>';
 
-  // Two peek screenshot placeholders — loadImg called after DOM insert
+  // Screenshots peek bottom-right
   var peekClass = isMac ? 'peek-img peek-mac' : 'peek-img';
   var peekHtml = item.ssMax > 0
     ? '<div class="banner-ss-peek">'
@@ -690,9 +567,9 @@ function buildCard(id, item, isApp) {
   var tagline = isApp ? item.desc.split('.')[0]+'.' : item.tagline;
   var cardClass = (isApp ? 'app-card' : 'project-card-new') + ' reveal-scale';
 
-  return '<div class="'+cardClass+'" data-id="'+id+'" data-src="'+(isApp?'app':'project')+'" onclick="openModal(\''+(isApp?'app':'project')+'\',\''+id+'\')">'
+  return '<div class="'+cardClass+'" onclick="openModal(\''+(isApp?'app':'project')+'\',\''+id+'\')">'
     + '<div class="card-banner">'
-      + '<div class="card-banner-tint" style="background:radial-gradient(ellipse 120% 120% at 50% 110%,'+item.bannerTint+',transparent)"></div>'
+      + '<div class="card-banner-tint" style="background:radial-gradient(ellipse 140% 140% at 80% 120%,'+item.bannerTint+',transparent)"></div>'
       + '<div class="banner-icon" style="background:#e8e8e8">'+iconHtml+'</div>'
       + peekHtml
       + '<div class="card-banner-fade"></div>'
@@ -716,7 +593,6 @@ function renderProjectCards() {
   document.getElementById('projectsGrid').innerHTML = Object.entries(projectData).map(function(e){ return buildCard(e[0],e[1],false); }).join('');
 }
 
-/* ── After render: load peek images with fallback extension logic ── */
 function loadPeekImages() {
   document.querySelectorAll('.peek-img[data-ss-base]').forEach(function(img) {
     var base = img.getAttribute('data-ss-base');
@@ -725,15 +601,11 @@ function loadPeekImages() {
   });
 }
 
-/* ── After render: lazy-load card body icons ── */
 function loadCardIcons() {
   document.querySelectorAll('.lazy-icon[data-src]').forEach(function(img) {
     img.onerror = function() {
-      var parent = img.parentElement;
-      if (parent) {
-        parent.style.background = img.getAttribute('data-fallback-bg');
-        parent.innerHTML = '<span style="font-size:20px">'+img.getAttribute('data-fallback-emoji')+'</span>';
-      }
+      var p = img.parentElement;
+      if (p) { p.style.background = img.getAttribute('data-fallback-bg'); p.innerHTML = '<span style="font-size:22px">'+img.getAttribute('data-fallback-emoji')+'</span>'; }
     };
     img.onload = function() { img.classList.add('loaded'); };
     img.src = img.getAttribute('data-src');
@@ -750,16 +622,13 @@ function setIconEl(el, data) {
     img.onerror = function() { el.style.background = data.iconBg; el.textContent = data.emoji; };
     img.src = data.iconUrl;
     el.appendChild(img);
-  } else {
-    el.style.background = data.iconBg; el.textContent = data.emoji;
-  }
+  } else { el.style.background = data.iconBg; el.textContent = data.emoji; }
 }
 
 function openModal(src, id) {
   var data = src === 'app' ? appData[id] : projectData[id];
   if (!data) return;
   var isMac = data.type === 'macos';
-
   document.getElementById('modalHdrBgGrad').style.background = data.iconBg;
   setIconEl(document.getElementById('modalHdrIcon'), data);
   setIconEl(document.getElementById('modalIcon'), data);
@@ -768,15 +637,12 @@ function openModal(src, id) {
   document.getElementById('modalDesc').textContent = data.desc;
   document.getElementById('modalTech').innerHTML = data.tech.map(function(t){ return '<span class="modal-tech-tag">'+t+'</span>'; }).join('');
   document.getElementById('modalFeatures').innerHTML = data.features.map(function(f){ return '<li>'+f+'</li>'; }).join('');
-
   var ssWrap = document.getElementById('modalSs');
   var ssSec = document.getElementById('modalSsSection');
   var cls = isMac ? 'ss-mac' : 'ss-ios';
-
   if (data.ssMax > 0) {
     ssSec.style.display = '';
     ssWrap.innerHTML = '';
-    // Build all possible URLs and load them — hide broken ones
     for (var i = 1; i <= data.ssMax; i++) {
       (function(idx) {
         var img = document.createElement('img');
@@ -787,17 +653,13 @@ function openModal(src, id) {
         ssWrap.appendChild(img);
       })(i);
     }
-  } else {
-    ssSec.style.display = 'none';
-  }
-
+  } else { ssSec.style.display = 'none'; }
   var act = document.getElementById('modalActions');
   if (src === 'app' && data.storeUrl) {
     act.innerHTML = '<a href="'+data.storeUrl+'" target="_blank" class="modal-btn-store"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>View on App Store</a>';
   } else {
     act.innerHTML = '<span style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:100px;border:1px solid var(--border);font-size:14px;font-weight:600;color:var(--text-secondary)">'+(data.badge==='wip'?'&#x1F6A7; In Progress':'&#x1F5A5; macOS Project')+'</span>';
   }
-
   document.getElementById('modalOverlay').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
@@ -810,38 +672,31 @@ function closeModal(e) {
 document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
 
 /* ── Init ── */
-renderHero();
-renderAppCards();
-renderProjectCards();
-loadPeekImages();
-loadCardIcons();
+renderHero(); renderAppCards(); renderProjectCards(); loadPeekImages(); loadCardIcons();
 
-/* ── Intersection observer: reveal + peek animation + skill bars ── */
 var obs = new IntersectionObserver(function(entries) {
   entries.forEach(function(en) {
     if (!en.isIntersecting) return;
-    en.target.classList.add('visible', 'in-view');
-    en.target.querySelectorAll('.skill-bar').forEach(function(b, i) {
-      setTimeout(function() { b.style.width = b.dataset.width; b.classList.add('animate'); }, i * 100);
+    en.target.classList.add('visible','in-view');
+    en.target.querySelectorAll('.skill-bar').forEach(function(b,i) {
+      setTimeout(function() { b.style.width = b.dataset.width; b.classList.add('animate'); }, i*100);
     });
     obs.unobserve(en.target);
   });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+}, { threshold:0.12, rootMargin:'0px 0px -40px 0px' });
 
-document.querySelectorAll('.reveal, .reveal-scale').forEach(function(el) { obs.observe(el); });
+document.querySelectorAll('.reveal,.reveal-scale').forEach(function(el){ obs.observe(el); });
 setTimeout(function() {
-  document.querySelectorAll('.reveal-scale').forEach(function(el) {
-    if (!el.classList.contains('visible')) obs.observe(el);
-  });
+  document.querySelectorAll('.reveal-scale').forEach(function(el){ if (!el.classList.contains('visible')) obs.observe(el); });
 }, 150);
 
 window.addEventListener('scroll', function() {
   document.getElementById('mainNav').classList.toggle('scrolled', scrollY > 20);
-}, { passive: true });
+}, { passive:true });
 
 var glow = document.getElementById('cursorGlow');
 if (matchMedia('(pointer:fine)').matches)
-  document.addEventListener('mousemove', function(e) { glow.style.left = e.clientX+'px'; glow.style.top = e.clientY+'px'; });
+  document.addEventListener('mousemove', function(e) { glow.style.left=e.clientX+'px'; glow.style.top=e.clientY+'px'; });
 else glow.style.display = 'none';
 </script>
 </body>
