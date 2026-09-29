@@ -81,9 +81,8 @@
     .ph-w-item i{width:2.2cqw;height:2.2cqw;border-radius:50%;flex:none}
     .ph-grid{display:grid;grid-template-columns:repeat(4,1fr);column-gap:3cqw;row-gap:4.4cqw;margin-top:7cqw}
     .ph-app{display:flex;flex-direction:column;align-items:center;gap:1.3cqw;min-width:0}
-    .ph-icon{width:100%;aspect-ratio:1;border-radius:22.4%;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 .5cqw 1.8cqw rgba(0,0,0,.14);background:#ddd}
+    .ph-icon{width:100%;aspect-ratio:1;border-radius:22.4%;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 .5cqw 1.8cqw rgba(0,0,0,.14);background:transparent}
     .ph-icon img{width:100%;height:100%;object-fit:cover;display:block}
-    .ph-emoji{font-size:7.5cqw;line-height:1}
     .ph-label{max-width:125%;font-size:2.7cqw;font-weight:500;color:#1c1c1e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.01em}
     .ph-home-bar{position:absolute;left:50%;bottom:2.4cqw;transform:translateX(-50%);width:30cqw;height:1.2cqw;border-radius:1cqw;background:#111;opacity:.9;z-index:4}
     @media(prefers-reduced-motion:reduce){.phone-wrap{transition:none}}
@@ -564,28 +563,22 @@ function renderHero() {
   [appData, projectData].forEach(function(group) {
     Object.keys(group).forEach(function(k) {
       var d = group[k];
+      if (!d.iconUrl) return;
       var app = document.createElement('div');
       app.className = 'ph-app';
       var t = document.createElement('div');
       t.className = 'ph-icon';
-      t.style.background = d.iconBg;
-      function showEmoji() {
-        t.textContent = '';
-        var e = document.createElement('span');
-        e.className = 'ph-emoji';
-        e.textContent = d.emoji;
-        t.appendChild(e);
-      }
-      if (d.iconUrl) {
-        var img = new Image();
-        img.alt = '';
-        img.onerror = showEmoji;
-        img.src = d.iconUrl;
-        t.appendChild(img);
-      } else { showEmoji(); }
+      var img = new Image();
+      img.alt = short[k] || d.name.split(':')[0];
+      img.decoding = 'async';
+      // same folder as index.html + iphone-frame.png, so it loads wherever the site is served
+      img.src = d.iconUrl.replace(/^https?:\/\/[^\/]+\//, '');
+      // MacCleaner's icon file has a transparent margin (macOS style); zoom it to fill like the others
+      if (k === 'maccleaner') img.style.transform = 'translate(-3.65%,-3.65%) scale(1.14)';
+      t.appendChild(img);
       var l = document.createElement('span');
       l.className = 'ph-label';
-      l.textContent = short[k] || d.name.split(':')[0];
+      l.textContent = img.alt;
       app.appendChild(t);
       app.appendChild(l);
       grid.appendChild(app);
