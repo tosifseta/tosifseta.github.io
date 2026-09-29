@@ -63,15 +63,29 @@
     .hero-visual-wrapper{position:relative;width:250px;perspective:1400px}
     .phone-wrap{position:relative;width:250px;aspect-ratio:769/1559;container-type:inline-size;transition:transform .6s cubic-bezier(.4,0,.2,1);filter:drop-shadow(0 36px 40px rgba(0,0,0,.2)) drop-shadow(0 8px 14px rgba(0,0,0,.12))}
     .hero-visual-wrapper:hover .phone-wrap{transform:rotateY(-9deg) rotateX(3deg)}
-    /* screen = the transparent cutout inside iphone-frame.png (676x1467 at 46,46 of 769x1559) */
-    .ph-screen{position:absolute;left:5.982%;top:2.951%;width:87.906%;height:94.098%;overflow:hidden;background:#000}
-    .ph-shot{position:absolute;inset:0;width:100%;height:100%;display:block}
+    /* screen = transparent cutout of iphone-frame.png (676x1467 at 46,46 inside 769x1559) */
+    .ph-screen{position:absolute;left:5.982%;top:2.951%;width:87.906%;height:94.098%;overflow:hidden;border-radius:12cqw;background:radial-gradient(120% 55% at 15% 0%,#cfe4ff 0%,transparent 62%),radial-gradient(90% 55% at 100% 42%,#e6d3fb 0%,transparent 62%),linear-gradient(180deg,#e7f0ff 0%,#f3e9ff 58%,#ffe8ef 100%);font-family:-apple-system,'SF Pro Text','Outfit',sans-serif;color:#0f0f0f}
     .ph-frame{position:absolute;inset:0;width:100%;height:100%;z-index:5;pointer-events:none;display:block}
-    /* real app icons + labels laid over the home-screen screenshot */
-    .ph-a{position:absolute;aspect-ratio:1}
-    .ph-a img,.ph-a .ph-fb{width:100%;height:100%;display:block;border-radius:22.4%;object-fit:cover;box-shadow:0 .9cqw 2.2cqw rgba(0,0,0,.2)}
-    .ph-a .ph-fb{display:flex;align-items:center;justify-content:center;font-size:7cqw}
-    .ph-l{position:absolute;transform:translate(-50%,-50%);font-family:-apple-system,'SF Pro Text','Helvetica Neue',Arial,sans-serif;font-size:2.95cqw;font-weight:500;color:#fff;white-space:nowrap;letter-spacing:-.01em;text-shadow:0 0 1.6cqw rgba(0,0,0,.28)}
+    .ph-status{position:absolute;top:3.4cqw;left:0;right:0;height:6.4cqw;display:flex;align-items:center;justify-content:space-between;padding:0 8cqw 0 9.5cqw;z-index:4;font-size:3.9cqw;font-weight:600;letter-spacing:-.01em}
+    .ph-status-icons{display:flex;align-items:center;gap:1.4cqw}
+    .ph-status-icons svg{height:3cqw;width:auto;display:block;fill:currentColor}
+    .ph-content{position:absolute;inset:0;padding:15cqw 5cqw 0;display:flex;flex-direction:column}
+    .ph-widgets{display:grid;grid-template-columns:1fr 1fr;gap:3.4cqw}
+    .ph-widget{aspect-ratio:1;border-radius:7cqw;padding:4cqw;background:rgba(255,255,255,.66);box-shadow:0 .6cqw 3cqw rgba(30,30,60,.08),inset 0 0 0 .25cqw rgba(255,255,255,.7);display:flex;flex-direction:column}
+    .ph-w-head{display:flex;align-items:center;gap:1.4cqw;font-size:2.6cqw;font-weight:600;color:#636366}
+    .ph-w-dot{width:1.8cqw;height:1.8cqw;border-radius:50%;background:#34c759}
+    .ph-w-big{margin-top:auto;font-size:7.8cqw;white-space:nowrap;font-weight:800;letter-spacing:-.05em;line-height:1}
+    .ph-w-sub{font-size:2.5cqw;color:#636366;margin-top:1.2cqw;line-height:1.3}
+    .ph-w-list{margin-top:auto;display:flex;flex-direction:column;gap:1.9cqw}
+    .ph-w-item{display:flex;align-items:center;gap:2cqw;font-size:3.6cqw;font-weight:700;letter-spacing:-.02em}
+    .ph-w-item i{width:2.2cqw;height:2.2cqw;border-radius:50%;flex:none}
+    .ph-grid{display:grid;grid-template-columns:repeat(4,1fr);column-gap:3cqw;row-gap:4.4cqw;margin-top:7cqw}
+    .ph-app{display:flex;flex-direction:column;align-items:center;gap:1.3cqw;min-width:0}
+    .ph-icon{width:100%;aspect-ratio:1;border-radius:22.4%;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 .5cqw 1.8cqw rgba(0,0,0,.14);background:#ddd}
+    .ph-icon img{width:100%;height:100%;object-fit:cover;display:block}
+    .ph-emoji{font-size:7.5cqw;line-height:1}
+    .ph-label{max-width:125%;font-size:2.7cqw;font-weight:500;color:#1c1c1e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.01em}
+    .ph-home-bar{position:absolute;left:50%;bottom:2.4cqw;transform:translateX(-50%);width:30cqw;height:1.2cqw;border-radius:1cqw;background:#111;opacity:.9;z-index:4}
     @media(prefers-reduced-motion:reduce){.phone-wrap{transition:none}}
     .float-card{position:absolute;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:13px 17px;box-shadow:var(--shadow-md);font-size:12px;animation:float 4s ease-in-out infinite;z-index:20}
     .float-card-1{top:8%;right:-128px;animation-delay:0s}
@@ -298,8 +312,33 @@
     <div class="hero-visual-wrapper">
       <div class="phone-wrap" role="img" aria-label="iPhone showing Tosif Seta's App Store apps on the home screen">
         <div class="ph-screen">
-          <img class="ph-shot" src="iphone_screen.png" alt="">
-          <div id="heroAppGrid"></div>
+          <div class="ph-status">
+            <span>9:41</span>
+            <span class="ph-status-icons">
+              <svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+              <svg viewBox="0 0 17 12"><path d="M8.5 2.3c2.3 0 4.4.9 6 2.4l1.2-1.3A10.6 10.6 0 0 0 8.5.5C5.6.5 3 1.6 1.1 3.4l1.2 1.3a8.7 8.7 0 0 1 6.2-2.4zm0 3.6c1.3 0 2.5.5 3.5 1.3l1.2-1.3a7 7 0 0 0-9.4 0l1.2 1.3c1-.8 2.2-1.3 3.5-1.3zm0 3.5c-.6 0-1.2.3-1.6.7l1.6 1.8 1.6-1.8c-.4-.4-1-.7-1.6-.7z"/></svg>
+              <svg viewBox="0 0 27 12"><rect x=".5" y=".5" width="22" height="11" rx="3.3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="19" height="8" rx="2"/><path d="M24.5 4v4c.8-.3 1.5-1.1 1.5-2s-.7-1.7-1.5-2z" opacity=".45"/></svg>
+            </span>
+          </div>
+          <div class="ph-content">
+            <div class="ph-widgets">
+              <div class="ph-widget">
+                <div class="ph-w-head"><span class="ph-w-dot"></span>Live on App Store</div>
+                <div class="ph-w-big">5+ Apps</div>
+                <div class="ph-w-sub">iOS &middot; 3+ years shipping</div>
+              </div>
+              <div class="ph-widget">
+                <div class="ph-w-head">Built with</div>
+                <div class="ph-w-list">
+                  <div class="ph-w-item"><i style="background:#0071e3"></i>SwiftUI</div>
+                  <div class="ph-w-item"><i style="background:#af52de"></i>MVVM</div>
+                  <div class="ph-w-item"><i style="background:#34c759"></i>Combine</div>
+                </div>
+              </div>
+            </div>
+            <div class="ph-grid" id="heroAppGrid"></div>
+          </div>
+          <div class="ph-home-bar"></div>
         </div>
         <img class="ph-frame" src="iphone-frame.png" alt="">
       </div>
@@ -519,47 +558,38 @@ var projectData = {
 
 /* ── Hero ── */
 function renderHero() {
-  // positions are measured on the 1206x2622 home-screen screenshot
-  var SW=1206, SH=2622, SZ=179, GX=[105.4,378,649,921.6], GY=[858.1,1152.5];
   var short = {pdfeditor:'PDF Editor', cleanup:'CleanUp', purecheck:'PureCheck', affirmation:'Affirmations', resumebuilder:'ResumeIt', shortcut:'Shortcut', maccleaner:'MacCleaner'};
-  var slots = [];
+  var grid = document.getElementById('heroAppGrid');
+  grid.textContent = '';
   [appData, projectData].forEach(function(group) {
     Object.keys(group).forEach(function(k) {
       var d = group[k];
-      slots.push({label: short[k] || d.name.split(':')[0], emoji: d.emoji, bg: d.iconBg, url: d.iconUrl});
+      var app = document.createElement('div');
+      app.className = 'ph-app';
+      var t = document.createElement('div');
+      t.className = 'ph-icon';
+      t.style.background = d.iconBg;
+      function showEmoji() {
+        t.textContent = '';
+        var e = document.createElement('span');
+        e.className = 'ph-emoji';
+        e.textContent = d.emoji;
+        t.appendChild(e);
+      }
+      if (d.iconUrl) {
+        var img = new Image();
+        img.alt = '';
+        img.onerror = showEmoji;
+        img.src = d.iconUrl;
+        t.appendChild(img);
+      } else { showEmoji(); }
+      var l = document.createElement('span');
+      l.className = 'ph-label';
+      l.textContent = short[k] || d.name.split(':')[0];
+      app.appendChild(t);
+      app.appendChild(l);
+      grid.appendChild(app);
     });
-  });
-  var host = document.getElementById('heroAppGrid');
-  host.textContent = '';
-  slots.slice(0,7).forEach(function(s, i) {
-    var col = i % 4, row = Math.floor(i / 4), pad = SZ * 0.02;
-    var a = document.createElement('div');
-    a.className = 'ph-a';
-    a.style.left = ((GX[col] - pad) / SW * 100) + '%';
-    a.style.top = ((GY[row] - pad) / SH * 100) + '%';
-    a.style.width = ((SZ + pad * 2) / SW * 100) + '%';
-    function showEmoji() {
-      a.textContent = '';
-      var f = document.createElement('div');
-      f.className = 'ph-fb';
-      f.style.background = s.bg;
-      f.textContent = s.emoji;
-      a.appendChild(f);
-    }
-    if (s.url) {
-      var img = new Image();
-      img.alt = s.label;
-      img.onerror = showEmoji;
-      img.src = s.url;
-      a.appendChild(img);
-    } else { showEmoji(); }
-    host.appendChild(a);
-    var l = document.createElement('span');
-    l.className = 'ph-l';
-    l.textContent = s.label;
-    l.style.left = ((GX[col] + SZ / 2) / SW * 100) + '%';
-    l.style.top = ((GY[row] + SZ + 37) / SH * 100) + '%';
-    host.appendChild(l);
   });
 }
 
