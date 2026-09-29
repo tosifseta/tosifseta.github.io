@@ -59,26 +59,58 @@
     .btn-secondary:hover{transform:translateY(-2px);border-color:var(--border-hover);box-shadow:var(--shadow-md)}
 
     /* PHONE */
-    .hero-visual{flex:0 0 320px;display:flex;align-items:center;justify-content:center;animation:revealUp 1s ease .6s both}
-    .hero-visual-wrapper{position:relative;width:220px}
-    .phone-wrap{position:relative;width:220px;aspect-ratio:393/852;transition:transform .5s cubic-bezier(.4,0,.2,1);filter:drop-shadow(0 40px 60px rgba(0,0,0,.22))}
-    .hero-visual-wrapper:hover .phone-wrap{transform:rotateY(-6deg) rotateX(3deg) scale(1.03)}
-    .phone-frame-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:10}
-    .phone-screen-area{position:absolute;top:3%;left:4%;right:4%;bottom:3%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;z-index:1;background:#f2f2f7;border-radius:44px;overflow:hidden}
-    .phone-status-bar{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:14px 22px 0;z-index:5}
-    .phone-time-text{font-size:12px;font-weight:700;color:#0f0f0f;font-family:'JetBrains Mono',monospace}
-    .phone-island{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:72px;height:20px;background:#000;border-radius:100px;z-index:6}
-    .phone-app-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%;padding:0 12px;margin-top:52px}
-    .phone-app{aspect-ratio:1;border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.12);background:#ddd}
-    .phone-app img{width:100%;height:100%;object-fit:cover;display:block}
-    .phone-app-emoji{font-size:16px}
-    .phone-widget{width:calc(100% - 24px);background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 4px 16px rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.05)}
-    .phone-wt{color:#636366;font-size:8px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px}
-    .phone-wv{color:#0f0f0f;font-size:18px;font-weight:800;letter-spacing:-1px}
-    .phone-ws{color:#636366;font-size:8px;margin-top:2px}
+    .hero-visual{flex:0 0 380px;display:flex;align-items:center;justify-content:center;animation:revealUp 1s ease .6s both}
+    .hero-visual-wrapper{position:relative;width:250px;perspective:1400px}
+    .phone-wrap{position:relative;width:250px;aspect-ratio:71.5/149.6;container-type:inline-size;transition:transform .6s cubic-bezier(.4,0,.2,1);filter:drop-shadow(0 36px 40px rgba(0,0,0,.2)) drop-shadow(0 8px 14px rgba(0,0,0,.12))}
+    .hero-visual-wrapper:hover .phone-wrap{transform:rotateY(-9deg) rotateX(3deg)}
+    /* side buttons (sit behind the body so only the edge shows) */
+    .ph-btn{position:absolute;width:2cqw;background:linear-gradient(90deg,#77716a,#cfc9be 50%,#8d877d)}
+    .ph-btn.l{left:-.9cqw;border-radius:.8cqw 0 0 .8cqw}
+    .ph-btn.r{right:-.9cqw;border-radius:0 .8cqw .8cqw 0;background:linear-gradient(90deg,#8d877d,#cfc9be 50%,#77716a)}
+    .ph-btn.action{top:13%;height:3.4%}
+    .ph-btn.volup{top:19.5%;height:6.4%}
+    .ph-btn.voldn{top:27.5%;height:6.4%}
+    .ph-btn.power{top:23%;height:10.2%}
+    /* titanium body */
+    .ph-body{position:absolute;inset:0;border-radius:15.5cqw;background:linear-gradient(135deg,#ebe6dd 0%,#aaa398 16%,#ddd7cc 34%,#8e887e 52%,#d3cdc1 72%,#9a9488 100%);box-shadow:inset 0 0 0 .45cqw rgba(255,255,255,.5),inset 0 0 1.2cqw .3cqw rgba(0,0,0,.28)}
+    .ph-bezel{position:absolute;inset:1.5cqw;border-radius:14cqw;background:#050505;box-shadow:0 0 0 .35cqw rgba(0,0,0,.55),inset 0 0 0 .3cqw rgba(255,255,255,.06)}
+    /* screen */
+    .ph-screen{position:absolute;inset:3.3cqw;border-radius:12.4cqw;overflow:hidden;background:radial-gradient(120% 55% at 15% 0%,#cfe4ff 0%,transparent 62%),radial-gradient(90% 55% at 100% 42%,#e6d3fb 0%,transparent 62%),linear-gradient(180deg,#e7f0ff 0%,#f3e9ff 58%,#ffe8ef 100%);font-family:-apple-system,'SF Pro Text','Outfit',sans-serif;color:#0f0f0f}
+    .ph-glare{position:absolute;inset:0;z-index:20;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.34) 0%,rgba(255,255,255,0) 32%),linear-gradient(295deg,rgba(255,255,255,.12) 0%,rgba(255,255,255,0) 22%)}
+    .ph-island{position:absolute;top:2.6cqw;left:50%;transform:translateX(-50%);width:29cqw;height:8.6cqw;border-radius:10cqw;background:#000;z-index:15}
+    .ph-island::after{content:'';position:absolute;right:2.4cqw;top:50%;width:3.2cqw;height:3.2cqw;margin-top:-1.6cqw;border-radius:50%;background:radial-gradient(circle at 35% 35%,#2a3550 0%,#0b0f1a 55%,#000 100%)}
+    .ph-status{position:absolute;top:3.4cqw;left:0;right:0;height:6.4cqw;display:flex;align-items:center;justify-content:space-between;padding:0 8.5cqw 0 10cqw;z-index:14;font-size:4.1cqw;font-weight:600;letter-spacing:-.01em}
+    .ph-status-icons{display:flex;align-items:center;gap:1.4cqw}
+    .ph-status-icons svg{height:3.2cqw;width:auto;display:block;fill:currentColor}
+    .ph-content{position:absolute;inset:0;padding:15cqw 5.2cqw 0;display:flex;flex-direction:column}
+    .ph-widgets{display:grid;grid-template-columns:1fr 1fr;gap:3.4cqw}
+    .ph-widget{aspect-ratio:1;border-radius:7.2cqw;padding:4.2cqw;background:rgba(255,255,255,.66);box-shadow:0 .6cqw 3cqw rgba(30,30,60,.08),inset 0 0 0 .25cqw rgba(255,255,255,.7);display:flex;flex-direction:column}
+    .ph-w-head{display:flex;align-items:center;gap:1.4cqw;font-size:2.7cqw;font-weight:600;color:#636366}
+    .ph-w-dot{width:1.8cqw;height:1.8cqw;border-radius:50%;background:#34c759}
+    .ph-w-big{margin-top:auto;font-size:9.6cqw;font-weight:800;letter-spacing:-.05em;line-height:1}
+    .ph-w-sub{font-size:2.6cqw;color:#636366;margin-top:1.2cqw;line-height:1.3}
+    .ph-w-list{margin-top:auto;display:flex;flex-direction:column;gap:1.9cqw}
+    .ph-w-item{display:flex;align-items:center;gap:2cqw;font-size:3.7cqw;font-weight:700;letter-spacing:-.02em}
+    .ph-w-item i{width:2.2cqw;height:2.2cqw;border-radius:50%;flex:none}
+    .ph-grid{display:grid;grid-template-columns:repeat(4,1fr);column-gap:3cqw;row-gap:3.6cqw;margin-top:6cqw}
+    .ph-app{display:flex;flex-direction:column;align-items:center;gap:1.1cqw;min-width:0}
+    .ph-icon{width:100%;aspect-ratio:1;border-radius:22.4%;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 .5cqw 1.8cqw rgba(0,0,0,.14),inset 0 0 0 .2cqw rgba(255,255,255,.25);background:#ddd}
+    .ph-icon img{width:100%;height:100%;object-fit:cover;display:block}
+    .ph-emoji{font-size:8cqw;line-height:1}
+    .ph-label{max-width:120%;font-size:2.75cqw;font-weight:500;color:#1c1c1e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.01em}
+    .ph-dots{position:absolute;left:0;right:0;bottom:31.5cqw;display:flex;justify-content:center;gap:1.7cqw}
+    .ph-dots i{width:1.7cqw;height:1.7cqw;border-radius:50%;background:rgba(0,0,0,.22)}
+    .ph-dots i:first-child{background:rgba(0,0,0,.6)}
+    .ph-dock{position:absolute;left:3.4cqw;right:3.4cqw;bottom:6.4cqw;height:22.5cqw;border-radius:8.4cqw;padding:2.7cqw 3.2cqw;display:grid;grid-template-columns:repeat(4,1fr);gap:3cqw;background:rgba(255,255,255,.5);box-shadow:inset 0 0 0 .25cqw rgba(255,255,255,.6)}
+    .ph-dock .ph-icon{height:100%;width:auto;margin:0 auto}
+    .ph-home-bar{position:absolute;left:50%;bottom:2cqw;transform:translateX(-50%);width:32cqw;height:1.25cqw;border-radius:1cqw;background:#111;opacity:.9;z-index:15}
+    .ph-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;display:block;z-index:5}
+    .ph-screen.has-shot .ph-status,.ph-screen.has-shot .ph-content,.ph-screen.has-shot .ph-dots,.ph-screen.has-shot .ph-dock,.ph-screen.has-shot .ph-home-bar{display:none}
+    @media(prefers-reduced-motion:reduce){.phone-wrap{transition:none}}
     .float-card{position:absolute;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:13px 17px;box-shadow:var(--shadow-md);font-size:12px;animation:float 4s ease-in-out infinite;z-index:20}
-    .float-card-1{top:10px;right:-92px;animation-delay:0s}
-    .float-card-2{bottom:40px;left:-98px;animation-delay:-2s}
+    .float-card-1{top:8%;right:-128px;animation-delay:0s}
+    .float-card-2{bottom:9%;left:-156px;animation-delay:-2s}
+    @media(max-width:1120px){.float-card-1{right:-84px}.float-card-2{left:-104px}}
     @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
     .float-label{color:var(--text-tertiary);font-size:10px;margin-bottom:2px;text-transform:uppercase;letter-spacing:.08em;font-weight:600}
     .float-value{color:var(--text-primary);font-weight:700;font-size:14px}
@@ -253,7 +285,10 @@
 
     @media(max-width:768px){
       #hero{flex-direction:column;gap:48px;padding-top:72px}
-      .hero-visual{display:none}
+      .hero-visual{flex:none;width:100%}
+      .hero-visual-wrapper{width:100%;display:flex;flex-direction:column;align-items:center;gap:14px}
+      .phone-wrap{width:min(250px,68vw)}
+      .float-card{position:static;animation:none;width:min(280px,100%)}
       .stats-grid{grid-template-columns:1fr}
       .skills-container{grid-template-columns:1fr}
       .nav-links{display:none}
@@ -295,28 +330,44 @@
   </div>
   <div class="hero-visual">
     <div class="hero-visual-wrapper">
-      <div class="phone-wrap">
-        <div class="phone-screen-area">
-          <div class="phone-status-bar">
-            <span class="phone-time-text">9:41</span>
-            <span style="font-size:10px;color:#636366;font-weight:600">&#9679;&#9679;&#9679;</span>
+      <div class="phone-wrap" role="img" aria-label="iPhone showing Tosif Seta's App Store apps on the home screen">
+        <span class="ph-btn l action"></span><span class="ph-btn l volup"></span><span class="ph-btn l voldn"></span><span class="ph-btn r power"></span>
+        <div class="ph-body"></div>
+        <div class="ph-bezel"></div>
+        <div class="ph-screen">
+          <img class="ph-shot" src="assets/home-screen.png" alt="" onload="this.parentElement.classList.add('has-shot')" onerror="this.remove()">
+          <div class="ph-island"></div>
+          <div class="ph-status">
+            <span>9:41</span>
+            <span class="ph-status-icons">
+              <svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+              <svg viewBox="0 0 17 12"><path d="M8.5 2.3c2.3 0 4.4.9 6 2.4l1.2-1.3A10.6 10.6 0 0 0 8.5.5C5.6.5 3 1.6 1.1 3.4l1.2 1.3a8.7 8.7 0 0 1 6.2-2.4zm0 3.6c1.3 0 2.500.5 3.500 1.300l1.200-1.300a7 7 0 0 0-9.400 0l1.200 1.300c1-.8 2.200-1.300 3.500-1.300zm0 3.500c-.6 0-1.200.3-1.600.7l1.600 1.800 1.600-1.800c-.4-.4-1-.7-1.600-.7z"/></svg>
+              <svg viewBox="0 0 27 12"><rect x=".5" y=".5" width="22" height="11" rx="3.3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="19" height="8" rx="2"/><path d="M24.500 4v4c.8-.3 1.500-1.100 1.500-2s-.7-1.700-1.500-2z" opacity=".45"/></svg>
+            </span>
           </div>
-          <div class="phone-island"></div>
-          <div class="phone-app-grid" id="heroAppGrid"></div>
-          <div class="phone-widget">
-            <div class="phone-wt">Live on App Store</div>
-            <div class="phone-wv">4 Apps</div>
-            <div class="phone-ws">iOS &middot; 3+ years shipping</div>
+          <div class="ph-content">
+            <div class="ph-widgets">
+              <div class="ph-widget">
+                <div class="ph-w-head"><span class="ph-w-dot"></span>Live on App Store</div>
+                <div class="ph-w-big">4 Apps</div>
+                <div class="ph-w-sub">iOS &middot; 3+ years shipping</div>
+              </div>
+              <div class="ph-widget">
+                <div class="ph-w-head">Built with</div>
+                <div class="ph-w-list">
+                  <div class="ph-w-item"><i style="background:#0071e3"></i>SwiftUI</div>
+                  <div class="ph-w-item"><i style="background:#af52de"></i>MVVM</div>
+                  <div class="ph-w-item"><i style="background:#34c759"></i>Combine</div>
+                </div>
+              </div>
+            </div>
+            <div class="ph-grid" id="heroAppGrid"></div>
           </div>
+          <div class="ph-dots"><i></i><i></i><i></i></div>
+          <div class="ph-dock" id="heroDock"></div>
+          <div class="ph-home-bar"></div>
+          <div class="ph-glare"></div>
         </div>
-        <svg class="phone-frame-svg" viewBox="0 0 393 852" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="1" y="1" width="391" height="850" rx="54" fill="none" stroke="#c8c8cc" stroke-width="2"/>
-          <rect x="2" y="2" width="389" height="848" rx="53" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1"/>
-          <rect x="390" y="200" width="4" height="70" rx="2" fill="#c8c8cc"/>
-          <rect x="-1" y="160" width="3" height="44" rx="1.5" fill="#c8c8cc"/>
-          <rect x="-1" y="214" width="3" height="66" rx="1.5" fill="#c8c8cc"/>
-          <rect x="-1" y="120" width="3" height="28" rx="1.5" fill="#c8c8cc"/>
-        </svg>
       </div>
       <div class="float-card float-card-1">
         <div class="float-label">Current Role</div>
@@ -534,12 +585,61 @@ var projectData = {
 
 /* ── Hero ── */
 function renderHero() {
-  var all = Object.values(appData).concat(Object.values(projectData));
-  var slots = all.slice(0,7).concat([{emoji:'⚙️',iconBg:'linear-gradient(135deg,#636e72,#2d3436)',iconUrl:null}]);
-  document.getElementById('heroAppGrid').innerHTML = slots.map(function(s) {
-    if (s.iconUrl) return '<div class="phone-app"><img loading="lazy" onerror="this.parentElement.style.background=\''+s.iconBg+'\';this.parentElement.innerHTML=\'<span class=phone-app-emoji>'+s.emoji+'</span>\'" src="'+s.iconUrl+'"></div>';
-    return '<div class="phone-app" style="background:'+s.iconBg+'"><span class="phone-app-emoji">'+s.emoji+'</span></div>';
-  }).join('');
+  var short = {pdfeditor:'PDF Editor', cleanup:'CleanUp', purecheck:'PureCheck', affirmation:'Affirmations', resumebuilder:'ResumeIt', shortcut:'Shortcut', maccleaner:'MacCleaner'};
+  var slots = [];
+  [appData, projectData].forEach(function(group) {
+    Object.keys(group).forEach(function(k) {
+      var d = group[k];
+      slots.push({label: short[k] || d.name.split(':')[0], emoji: d.emoji, bg: d.iconBg, url: d.iconUrl});
+    });
+  });
+  slots.push(
+    {label:'Xcode', emoji:'\uD83D\uDD28', bg:'linear-gradient(135deg,#1c8cff,#0a5fd6)'},
+    {label:'TestFlight', emoji:'\u2708\uFE0F', bg:'linear-gradient(135deg,#35b0ff,#0b6bd3)'},
+    {label:'GitHub', emoji:'\uD83D\uDC19', bg:'linear-gradient(135deg,#3a3f47,#15181c)'},
+    {label:'Notes', emoji:'\uD83D\uDDD2\uFE0F', bg:'linear-gradient(135deg,#ffd94d,#f5b800)'},
+    {label:'Settings', emoji:'\u2699\uFE0F', bg:'linear-gradient(135deg,#8e8e93,#48484a)'}
+  );
+  function tile(s, withLabel) {
+    var app = document.createElement('div');
+    app.className = 'ph-app';
+    var t = document.createElement('div');
+    t.className = 'ph-icon';
+    t.style.background = s.bg;
+    function showEmoji() {
+      t.textContent = '';
+      var e = document.createElement('span');
+      e.className = 'ph-emoji';
+      e.textContent = s.emoji;
+      t.appendChild(e);
+    }
+    if (s.url) {
+      var img = new Image();
+      img.alt = '';
+      img.onerror = showEmoji;
+      img.src = s.url;
+      t.appendChild(img);
+    } else { showEmoji(); }
+    app.appendChild(t);
+    if (withLabel) {
+      var l = document.createElement('span');
+      l.className = 'ph-label';
+      l.textContent = s.label;
+      app.appendChild(l);
+    }
+    return app;
+  }
+  var grid = document.getElementById('heroAppGrid');
+  grid.textContent = '';
+  slots.forEach(function(s) { grid.appendChild(tile(s, true)); });
+  var dock = document.getElementById('heroDock');
+  dock.textContent = '';
+  [
+    {emoji:'\uD83D\uDCDE', bg:'linear-gradient(135deg,#5be07a,#22b44a)'},
+    {emoji:'\uD83E\uDDED', bg:'linear-gradient(135deg,#4db3ff,#0a6be0)'},
+    {emoji:'\uD83D\uDCAC', bg:'linear-gradient(135deg,#67e58a,#1fb648)'},
+    {emoji:'\u2709\uFE0F', bg:'linear-gradient(135deg,#4fb6ff,#0a6be0)'}
+  ].forEach(function(s) { dock.appendChild(tile(s, false)); });
 }
 
 /* ── Build card ── */
